@@ -20,13 +20,14 @@ a simplified tool set of php and javascript based utilities.
 ### New features
 
 * Support for `>=php 7.2`
-* Support for `symfony/process` 4
+* Support for `symfony/process` 4/5
 
 ### BC breaks
 
 - Minimum PHP version required is now PHP 7.2
 - Switching from `leafo/lessphp` to `wikimedia/less.php`
     - Due to this switch support has been dropped for `setPreserveComments` & `registerFunction` by the `LessphpFilter`.
+- `twig/twig` support is optional now, `twig/extensions` must be required in your requirements if you need it.
 
 # Filters Removed:
 - Roole | Roole was a language that compiles to CSS, the project is now dead and has been for at least 6 years | Use LESS \ SCSS instead

@@ -17,21 +17,10 @@ use ScssPhp\ScssPhp\Compiler;
  */
 class ScssphpFilter extends BaseFilter implements DependencyExtractorInterface
 {
-    private $compass = false;
     private $importPaths = [];
     private $customFunctions = [];
     private $formatter;
     private $variables = [];
-
-    public function enableCompass($enable = true)
-    {
-        $this->compass = (Boolean) $enable;
-    }
-
-    public function isCompassEnabled()
-    {
-        return $this->compass;
-    }
 
     public function setFormatter($formatter)
     {
@@ -79,10 +68,6 @@ class ScssphpFilter extends BaseFilter implements DependencyExtractorInterface
     public function filterLoad(AssetInterface $asset)
     {
         $sc = new Compiler();
-
-        if ($this->compass) {
-            new \scss_compass($sc);
-        }
 
         if ($dir = $asset->getSourceDirectory()) {
             $sc->addImportPath($dir);

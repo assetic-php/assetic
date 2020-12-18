@@ -53,6 +53,23 @@ class AssetReferenceTest extends TestCase
         );
     }
 
+    public function testGetName()
+    {
+        $this->assertEquals('foo', $this->ref->getName());
+    }
+
+    public function testGetAsset()
+    {
+        $asset = $this->getMockBuilder(AssetInterface::class)->getMock();
+
+        $this->am->expects($this->once())
+                 ->method('get')
+                 ->with('foo')
+                 ->will($this->returnValue($asset));
+
+        $this->assertEquals($asset, $this->ref->getAsset(), '->getAsset() returns the asset object');
+    }
+
     public function testLazyFilters()
     {
         $this->am->expects($this->never())->method('get');

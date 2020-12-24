@@ -5,6 +5,7 @@ use Assetic\Contracts\Filter\DependencyExtractorInterface;
 use Assetic\Factory\AssetFactory;
 use Assetic\Util\CssUtils;
 use ScssPhp\ScssPhp\Compiler;
+use ScssPhp\ScssPhp\OutputStyle;
 
 /**
  * Loads SCSS files using the PHP implementation of scss, scssphp.
@@ -17,24 +18,42 @@ use ScssPhp\ScssPhp\Compiler;
  */
 class ScssphpFilter extends BaseFilter implements DependencyExtractorInterface
 {
-    private $compass = false;
     private $importPaths = [];
     private $customFunctions = [];
     private $formatter;
+    private $outputStyle;
     private $variables = [];
 
     public function enableCompass($enable = true)
     {
-        $this->compass = (Boolean) $enable;
+        trigger_deprecation(
+            'assetic/framework',
+            '2.0.0',
+            'Compass for scssphp is deprecated and no longer supported.'
+        );
     }
 
     public function isCompassEnabled()
     {
-        return $this->compass;
+        trigger_deprecation(
+            'assetic/framework',
+            '2.0.0',
+            'Compass for scssphp is deprecated and no longer supported.'
+        );
+
+        return false;
     }
 
     public function setFormatter($formatter)
     {
+        trigger_deprecation(
+            'scssphp/scssphp',
+            '1.4.0',
+            'The method "%s" is deprecated. Use "%s" instead.',
+            'setFormatter',
+            'setOutputStyle'
+        );
+
         $legacyFormatters = array(
             'scss_formatter' => 'ScssPhp\ScssPhp\Formatter\Expanded',
             'scss_formatter_nested' => 'ScssPhp\ScssPhp\Formatter\Nested',
@@ -49,6 +68,15 @@ class ScssphpFilter extends BaseFilter implements DependencyExtractorInterface
         }
 
         $this->formatter = $formatter;
+    }
+
+    public function setOutputStyle(string $outputStyle)
+    {
+        if (!in_array($outputStyle, [OutputStyle::EXPANDED, OutputStyle::COMPRESSED])) {
+            throw new \InvalidArgumentException('The output style must be compatible with `ScssPhp\ScssPhp\OutputStyle`');
+        }
+
+        $this->outputStyle = $outputStyle;
     }
 
     public function setVariables(array $variables)
@@ -80,10 +108,6 @@ class ScssphpFilter extends BaseFilter implements DependencyExtractorInterface
     {
         $sc = new Compiler();
 
-        if ($this->compass) {
-            new \scss_compass($sc);
-        }
-
         if ($dir = $asset->getSourceDirectory()) {
             $sc->addImportPath($dir);
         }
@@ -98,6 +122,10 @@ class ScssphpFilter extends BaseFilter implements DependencyExtractorInterface
 
         if ($this->formatter) {
             $sc->setFormatter($this->formatter);
+        }
+
+        if ($this->outputStyle) {
+            $sc->setOutputStyle($this->outputStyle);
         }
 
         if (!empty($this->variables)) {

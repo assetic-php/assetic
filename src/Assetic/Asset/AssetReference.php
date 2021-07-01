@@ -32,6 +32,16 @@ class AssetReference implements AssetInterface
         }
     }
 
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getAsset()
+    {
+        return $this->resolve();
+    }
+
     public function ensureFilter(FilterInterface $filter)
     {
         $this->filters[] = $filter;

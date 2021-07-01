@@ -56,7 +56,7 @@
         "twig/extensions": "Assetic provides an integration with the Twig templating engine"
     },
     "replace": {
-        "kriswallsmith/assetic": "*"
+        "kriswallsmith/assetic": "self.version"
     },
     "autoload": {
         "psr-0": { "Assetic": "src/" },

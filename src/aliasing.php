@@ -6,6 +6,12 @@
  * @author Jack Wilkinson <me@jackwilky.com>
  */
 
+if (interface_exists(Assetic\Asset\AssetInterface::class, false)) {
+    // Prevent error with preloading
+    // @see https://github.com/googleapis/google-api-php-client/issues/1976
+    return;
+}
+
 class_alias(
     Assetic\Contracts\Asset\AssetInterface::class,
     Assetic\Asset\AssetInterface::class

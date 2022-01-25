@@ -6,9 +6,8 @@
  * @author Jack Wilkinson <me@jackwilky.com>
  */
 
+// Only run the aliasing once - Fixes preloading support on PHP 7.4+
 if (interface_exists(Assetic\Asset\AssetInterface::class, false)) {
-    // Prevent error with preloading
-    // @see https://github.com/googleapis/google-api-php-client/issues/1976
     return;
 }
 

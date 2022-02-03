@@ -16,11 +16,13 @@ class TraversableString implements \IteratorAggregate, \Countable
         $this->many = $many;
     }
 
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayIterator($this->many);
     }
 
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->many);

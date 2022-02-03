@@ -60,11 +60,13 @@ class FilterCollection implements FilterInterface, \IteratorAggregate, \Countabl
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayIterator($this->filters);
     }
 
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->filters);

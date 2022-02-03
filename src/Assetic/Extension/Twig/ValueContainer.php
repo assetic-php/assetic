@@ -45,6 +45,7 @@ class ValueContainer implements \ArrayAccess, \IteratorAggregate, \Countable
         throw new \BadMethodCallException('The ValueContainer is read-only.');
     }
 
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         $this->initialize();
@@ -52,6 +53,7 @@ class ValueContainer implements \ArrayAccess, \IteratorAggregate, \Countable
         return new \ArrayIterator($this->values);
     }
 
+    #[\ReturnTypeWillChange]
     public function count()
     {
         $this->initialize();

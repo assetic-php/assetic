@@ -95,7 +95,7 @@ class AssetCollectionIterator implements RecursiveIterator
         return false !== current($this->assets);
     }
 
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return current($this->assets) instanceof AssetCollectionInterface;
     }

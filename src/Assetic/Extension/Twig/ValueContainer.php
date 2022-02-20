@@ -43,7 +43,10 @@ class ValueContainer implements \ArrayAccess, \IteratorAggregate, \Countable
         throw new \BadMethodCallException('The ValueContainer is read-only.');
     }
 
-    public function offsetUnset(mixed $offset): void
+    // Return type should change to :void (and mixed $offset for parameter type
+    // hint) as soon as PHP 8.0 is the lowest version targetted
+    #[\ReturnTypeWillChange]
+    public function offsetUnset($offset)
     {
         throw new \BadMethodCallException('The ValueContainer is read-only.');
     }

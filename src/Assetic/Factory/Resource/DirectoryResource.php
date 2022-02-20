@@ -1,5 +1,6 @@
 <?php namespace Assetic\Factory\Resource;
 
+use Traversable;
 use Assetic\Contracts\Factory\Resource\IteratorResourceInterface;
 
 /**
@@ -61,7 +62,7 @@ class DirectoryResource implements IteratorResourceInterface
         return $this->path;
     }
 
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return is_dir($this->path)
             ? new DirectoryResourceIterator($this->getInnerIterator())

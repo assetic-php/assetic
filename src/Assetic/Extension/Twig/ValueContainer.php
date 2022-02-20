@@ -1,5 +1,6 @@
 <?php namespace Assetic\Extension\Twig;
 
+use Traversable;
 use Assetic\Contracts\ValueSupplierInterface;
 
 /**
@@ -17,14 +18,14 @@ class ValueContainer implements \ArrayAccess, \IteratorAggregate, \Countable
         $this->valueSupplier = $valueSupplier;
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         $this->initialize();
 
         return array_key_exists($offset, $this->values);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         $this->initialize();
 
@@ -35,7 +36,7 @@ class ValueContainer implements \ArrayAccess, \IteratorAggregate, \Countable
         return $this->values[$offset];
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         throw new \BadMethodCallException('The ValueContainer is read-only.');
     }
@@ -45,14 +46,14 @@ class ValueContainer implements \ArrayAccess, \IteratorAggregate, \Countable
         throw new \BadMethodCallException('The ValueContainer is read-only.');
     }
 
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         $this->initialize();
 
         return new \ArrayIterator($this->values);
     }
 
-    public function count()
+    public function count(): int
     {
         $this->initialize();
 

@@ -1,5 +1,6 @@
 <?php namespace Assetic\Asset;
 
+use Traversable;
 use Assetic\Contracts\Filter\FilterInterface;
 use Assetic\Util\VarUtils;
 
@@ -65,7 +66,7 @@ class GlobAsset extends AssetCollection
         return parent::getLastModified();
     }
 
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         if (!$this->initialized) {
             $this->initialize();

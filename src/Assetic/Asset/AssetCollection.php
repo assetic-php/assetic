@@ -1,5 +1,6 @@
 <?php namespace Assetic\Asset;
 
+use Traversable;
 use Assetic\Asset\Iterator\AssetCollectionFilterIterator;
 use Assetic\Asset\Iterator\AssetCollectionIterator;
 use Assetic\Filter\FilterCollection;
@@ -203,7 +204,7 @@ class AssetCollection implements \IteratorAggregate, AssetCollectionInterface
     /**
      * Returns an iterator for looping recursively over unique leaves.
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new \RecursiveIteratorIterator(new AssetCollectionFilterIterator(new AssetCollectionIterator($this, $this->clones)));
     }

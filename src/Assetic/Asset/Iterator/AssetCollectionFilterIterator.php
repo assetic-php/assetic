@@ -1,5 +1,7 @@
 <?php namespace Assetic\Asset\Iterator;
 
+use RecursiveFilterIterator;
+
 /**
  * Asset collection filter iterator.
  *
@@ -8,7 +10,7 @@
  *
  * @author Kris Wallsmith <kris.wallsmith@gmail.com>
  */
-class AssetCollectionFilterIterator extends \RecursiveFilterIterator
+class AssetCollectionFilterIterator extends RecursiveFilterIterator
 {
     private $visited;
     private $sources;
@@ -36,7 +38,7 @@ class AssetCollectionFilterIterator extends \RecursiveFilterIterator
      *
      * @return Boolean Returns true if we have not seen this asset yet
      */
-    public function accept()
+    public function accept(): bool
     {
         $asset = $this->getInnerIterator()->current(true);
         $duplicate = false;
@@ -66,7 +68,7 @@ class AssetCollectionFilterIterator extends \RecursiveFilterIterator
     /**
      * Passes visited objects and source URLs to the child iterator.
      */
-    public function getChildren()
+    public function getChildren(): ?RecursiveFilterIterator
     {
         return new self($this->getInnerIterator()->getChildren(), $this->visited, $this->sources);
     }

@@ -25,7 +25,9 @@ class ValueContainer implements \ArrayAccess, \IteratorAggregate, \Countable
         return array_key_exists($offset, $this->values);
     }
 
-    public function offsetGet($offset): mixed
+    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targetted
+    #[\ReturnTypeWillChange]
+    public function offsetGet($offset)
     {
         $this->initialize();
 
@@ -41,7 +43,7 @@ class ValueContainer implements \ArrayAccess, \IteratorAggregate, \Countable
         throw new \BadMethodCallException('The ValueContainer is read-only.');
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         throw new \BadMethodCallException('The ValueContainer is read-only.');
     }

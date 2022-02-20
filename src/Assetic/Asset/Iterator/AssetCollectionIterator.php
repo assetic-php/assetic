@@ -1,5 +1,6 @@
 <?php namespace Assetic\Asset\Iterator;
 
+use RecursiveIterator;
 use Assetic\Contracts\Asset\AssetCollectionInterface;
 
 /**
@@ -10,7 +11,7 @@ use Assetic\Contracts\Asset\AssetCollectionInterface;
  *
  * @author Kris Wallsmith <kris.wallsmith@gmail.com>
  */
-class AssetCollectionIterator implements \RecursiveIterator
+class AssetCollectionIterator implements RecursiveIterator
 {
     private $assets;
     private $filters;
@@ -40,6 +41,8 @@ class AssetCollectionIterator implements \RecursiveIterator
      *
      * @return \Assetic\Asset\AssetInterface
      */
+    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targetted
+    #[\ReturnTypeWillChange]
     public function current($raw = false)
     {
         $asset = current($this->assets);
@@ -70,22 +73,24 @@ class AssetCollectionIterator implements \RecursiveIterator
         return $clone;
     }
 
+    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targetted
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->assets);
     }
 
-    public function next()
+    public function next(): void
     {
-        return next($this->assets);
+        next($this->assets);
     }
 
-    public function rewind()
+    public function rewind(): void
     {
-        return reset($this->assets);
+        reset($this->assets);
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return false !== current($this->assets);
     }
@@ -98,7 +103,7 @@ class AssetCollectionIterator implements \RecursiveIterator
     /**
      * @uses current()
      */
-    public function getChildren()
+    public function getChildren(): ?RecursiveIterator
     {
         return new self($this->current(), $this->clones);
     }

@@ -44,7 +44,7 @@
     },
     "suggest": {
         "wikimedia/less.php": "The Assetic\\Filter\\LessphpFilter requires wikimedia/less.php",
-        "wikimedia/minify": "The Assetic\\Filter\\JavaScriptMinifierFilter requires wikimedia/minify",
+        "wikimedia/minify": "The Assetic\\Filter\\JavaScriptMinifierFilter && Assetic\\Filter\\CSSMinFilter requires wikimedia/minify",
         "scssphp/scssphp": "The Assetic\\Filter\\ScssphpFilter requires scssphp/scssphp",
         "meenie/javascript-packer": "The Assetic\\Filter\\PackerFilter requires meenie/javascript-packer",
         "ptachoire/cssembed": "The Assetic\\Filter\\PhpCssEmbedFilter requires ptachoire/cssembed",

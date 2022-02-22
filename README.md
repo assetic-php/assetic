@@ -82,11 +82,9 @@ The core provides the following filters in the `Assetic\Filter` namespace:
  * `CssRewriteFilter`: fixes relative URLs in CSS assets when moving to a new URL
  * `GoogleClosure\CompilerApiFilter`: compiles Javascript using the Google Closure Compiler API
  * `HandlebarsFilter`: compiles Handlebars templates into Javascript
+ * `JavaScriptMinifierFilter`: minifies Javascript
  * `JpegoptimFilter`: optimize your JPEGs
  * `JpegtranFilter`: optimize your JPEGs
- * `JSMinFilter`: minifies Javascript
- * `JSMinPlusFilter`: minifies Javascript
- * `JSqueezeFilter`: compresses Javascript
  * `LessFilter`: parses LESS into CSS (using less.js with node.js)
  * `LessphpFilter`: parses LESS into CSS (using lessphp)
  * `OptiPngFilter`: optimize your PNGs
@@ -246,15 +244,15 @@ A simple caching mechanism is provided to avoid unnecessary work.
 use Assetic\Asset\AssetCache;
 use Assetic\Asset\FileAsset;
 use Assetic\Cache\FilesystemCache;
-use Assetic\Filter\JsMinFilter;
+use Assetic\Filter\JavaScriptMinifierFilter;
 
-$jsMin = new JsMinFilter();
+$jsMinifier = new JavaScriptMinifierFilter();
 $js = new AssetCache(
-    new FileAsset('/path/to/some.js', array($jsMin)),
+    new FileAsset('/path/to/some.js', array($jsMinifier)),
     new FilesystemCache('/path/to/cache')
 );
 
-// the JsMin compressor will only run on the first call
+// the JavaScriptMinifierFilter compressor will only run on the first call
 $js->dump();
 $js->dump();
 $js->dump();

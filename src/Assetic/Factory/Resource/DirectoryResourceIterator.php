@@ -8,7 +8,7 @@
  */
 class DirectoryResourceIterator extends \RecursiveIteratorIterator
 {
-    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targetted
+    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targeted
     #[\ReturnTypeWillChange]
     public function current()
     {

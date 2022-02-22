@@ -41,7 +41,7 @@ class AssetCollectionIterator implements RecursiveIterator
      *
      * @return \Assetic\Asset\AssetInterface
      */
-    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targetted
+    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targeted
     #[\ReturnTypeWillChange]
     public function current($raw = false)
     {
@@ -73,7 +73,7 @@ class AssetCollectionIterator implements RecursiveIterator
         return $clone;
     }
 
-    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targetted
+    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targeted
     #[\ReturnTypeWillChange]
     public function key()
     {

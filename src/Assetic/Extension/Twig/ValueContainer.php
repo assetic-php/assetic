@@ -25,7 +25,7 @@ class ValueContainer implements \ArrayAccess, \IteratorAggregate, \Countable
         return array_key_exists($offset, $this->values);
     }
 
-    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targetted
+    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targeted
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
@@ -44,7 +44,7 @@ class ValueContainer implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     // Return type should change to :void (and mixed $offset for parameter type
-    // hint) as soon as PHP 8.0 is the lowest version targetted
+    // hint) as soon as PHP 8.0 is the lowest version targeted
     #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {

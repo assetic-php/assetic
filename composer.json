@@ -35,7 +35,6 @@
         "wikimedia/minify": "~2.2",
         "scssphp/scssphp": "^1.0",
         "meenie/javascript-packer": "^1.1",
-        "natxet/cssmin": "^3.0.6",
         "phpunit/phpunit": "^9.5.8",
         "psr/log": "^1.0",
         "ptachoire/cssembed": "^1.0",
@@ -48,7 +47,6 @@
         "wikimedia/minify": "The Assetic\\Filter\\JavaScriptMinifierFilter requires wikimedia/minify",
         "scssphp/scssphp": "The Assetic\\Filter\\ScssphpFilter requires scssphp/scssphp",
         "meenie/javascript-packer": "The Assetic\\Filter\\PackerFilter requires meenie/javascript-packer",
-        "natxet/cssmin": "The Assetic\\Filter\\CssMinFilter requires natxet/cssmin",
         "ptachoire/cssembed": "The Assetic\\Filter\\PhpCssEmbedFilter requires ptachoire/cssembed",
         "twig/twig": "Assetic provides an integration with the Twig templating engine"
     },

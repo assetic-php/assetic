@@ -10,7 +10,7 @@ use Assetic\Contracts\Filter\DependencyExtractorInterface;
 /**
  * Loads STYL files.
  *
- * @link http://learnboost.github.com/stylus/
+ * @link https://stylus-lang.com/
  * @author Konstantin Kudryashov <ever.zet@gmail.com>
  */
 class StylusFilter extends BaseNodeFilter implements DependencyExtractorInterface

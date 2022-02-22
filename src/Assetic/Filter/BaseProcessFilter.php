@@ -151,7 +151,7 @@ abstract class BaseProcessFilter extends BaseFilter
                 $arg = str_replace('{INPUT}', $this->inputPath, $arg);
 
                 // Only some processes output to file, others just use $process->getOutput()
-                if (strpos($arg, '{OUTPUT}') !== false) {
+                if (strpos($arg ?: '', '{OUTPUT}') !== false) {
                     $arg = str_replace('{OUTPUT}', $this->outputPath, $arg);
                     $this->outputToFile = true;
                 }
@@ -176,7 +176,7 @@ abstract class BaseProcessFilter extends BaseFilter
         $output = $this->getOutput();
 
         // Check for errors
-        if (strpos($output, 'Error: ') !== false) {
+        if (strpos($output ?: '', 'Error: ') !== false) {
             $this->cleanUp();
             throw FilterException::fromProcess($this->getProcess())->setInput($input);
         }

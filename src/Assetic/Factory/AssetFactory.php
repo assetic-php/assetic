@@ -185,7 +185,7 @@ class AssetFactory
                 $asset->add(call_user_func_array(array($this, 'createAsset'), $input));
             } else {
                 $asset->add($this->parseInput($input, $options));
-                $extensions[pathinfo($input, PATHINFO_EXTENSION)] = true;
+                $extensions[pathinfo($input ?: '', PATHINFO_EXTENSION)] = true;
             }
         }
 
@@ -202,7 +202,7 @@ class AssetFactory
         if (!empty($options['vars'])) {
             $toAdd = [];
             foreach ($options['vars'] as $var) {
-                if (false !== strpos($options['output'], '{'.$var.'}')) {
+                if (false !== strpos($options['output'] ?: '', '{'.$var.'}')) {
                     continue;
                 }
 
@@ -215,7 +215,7 @@ class AssetFactory
         }
 
         // append consensus extension if missing
-        if (1 == count($extensions) && !pathinfo($options['output'], PATHINFO_EXTENSION) && $extension = key($extensions)) {
+        if (1 == count($extensions) && !pathinfo($options['output'] ?: '', PATHINFO_EXTENSION) && $extension = key($extensions)) {
             $options['output'] .= '.'.$extension;
         }
 
@@ -295,7 +295,7 @@ class AssetFactory
             return $this->createAssetReference(substr($input, 1));
         }
 
-        if (false !== strpos($input, '://') || 0 === strpos($input, '//')) {
+        if (false !== strpos($input ?: '', '://') || 0 === strpos($input ?: '', '//')) {
             return $this->createHttpAsset($input, $options['vars']);
         }
 
@@ -311,7 +311,7 @@ class AssetFactory
             $input = $this->root.'/'.$path;
         }
 
-        if (false !== strpos($input, '*')) {
+        if (false !== strpos($input ?: '', '*')) {
             return $this->createGlobAsset($input, $root, $options['vars']);
         }
 
@@ -405,7 +405,7 @@ class AssetFactory
     private static function findRootDir($path, array $roots)
     {
         foreach ($roots as $root) {
-            if (0 === strpos($path, $root)) {
+            if (0 === strpos($path ?: '', $root)) {
                 return $root;
             }
         }

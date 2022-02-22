@@ -11,13 +11,13 @@ jobs:
     strategy:
       max-parallel: 6
       matrix:
-        phpVersion: ['7.2', '7.3', '7.4', '8.0']
+        phpVersion: ['7.3', '7.4', '8.0', '8.1']
       fail-fast: false
     runs-on: ubuntu-latest
     name: Linux / PHP ${{ matrix.phpVersion }}
     env:
       extensions: curl, fileinfo, gd, mbstring, openssl, pdo, pdo_sqlite, sqlite3, xml
-      key: october-rain-cache-v1
+      key: assetic-php-cache-v1
     steps:
       - name: Checkout changes
         uses: actions/checkout@v2

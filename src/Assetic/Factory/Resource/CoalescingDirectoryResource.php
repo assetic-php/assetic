@@ -1,5 +1,6 @@
 <?php namespace Assetic\Factory\Resource;
 
+use Traversable;
 use Assetic\Contracts\Factory\Resource\IteratorResourceInterface;
 use Assetic\Contracts\Factory\Resource\ResourceInterface;
 
@@ -62,7 +63,7 @@ class CoalescingDirectoryResource implements IteratorResourceInterface
         return implode(',', $parts);
     }
 
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new \ArrayIterator($this->getFileResources());
     }

@@ -1,5 +1,6 @@
 <?php namespace Assetic\Asset\Iterator;
 
+use RecursiveIterator;
 use Assetic\Contracts\Asset\AssetCollectionInterface;
 
 /**
@@ -10,7 +11,7 @@ use Assetic\Contracts\Asset\AssetCollectionInterface;
  *
  * @author Kris Wallsmith <kris.wallsmith@gmail.com>
  */
-class AssetCollectionIterator implements \RecursiveIterator
+class AssetCollectionIterator implements RecursiveIterator
 {
     private $assets;
     private $filters;
@@ -26,7 +27,7 @@ class AssetCollectionIterator implements \RecursiveIterator
         $this->output  = $coll->getTargetPath();
         $this->clones  = $clones;
 
-        if (false === $pos = strrpos($this->output, '.')) {
+        if (false === $pos = strrpos($this->output ?: '', '.')) {
             $this->output .= '_*';
         } else {
             $this->output = substr($this->output, 0, $pos).'_*'.substr($this->output, $pos);
@@ -40,6 +41,8 @@ class AssetCollectionIterator implements \RecursiveIterator
      *
      * @return \Assetic\Asset\AssetInterface
      */
+    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targeted
+    #[\ReturnTypeWillChange]
     public function current($raw = false)
     {
         $asset = current($this->assets);
@@ -53,7 +56,7 @@ class AssetCollectionIterator implements \RecursiveIterator
             $clone = $this->clones[$asset] = clone $asset;
 
             // generate a target path based on asset name
-            $name = sprintf('%s_%d', pathinfo($asset->getSourcePath(), PATHINFO_FILENAME) ?: 'part', $this->key() + 1);
+            $name = sprintf('%s_%d', pathinfo($asset->getSourcePath() ?: '', PATHINFO_FILENAME) ?: 'part', $this->key() + 1);
 
             $name = $this->removeDuplicateVar($name);
 
@@ -70,27 +73,29 @@ class AssetCollectionIterator implements \RecursiveIterator
         return $clone;
     }
 
+    // Return type should change to :mixed as soon as PHP 8.0 is the lowest version targeted
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->assets);
     }
 
-    public function next()
+    public function next(): void
     {
-        return next($this->assets);
+        next($this->assets);
     }
 
-    public function rewind()
+    public function rewind(): void
     {
-        return reset($this->assets);
+        reset($this->assets);
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return false !== current($this->assets);
     }
 
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return current($this->assets) instanceof AssetCollectionInterface;
     }
@@ -98,7 +103,7 @@ class AssetCollectionIterator implements \RecursiveIterator
     /**
      * @uses current()
      */
-    public function getChildren()
+    public function getChildren(): ?RecursiveIterator
     {
         return new self($this->current(), $this->clones);
     }
@@ -107,7 +112,7 @@ class AssetCollectionIterator implements \RecursiveIterator
     {
         foreach ($this->vars as $var) {
             $var = '{'.$var.'}';
-            if (false !== strpos($name, $var) && false !== strpos($this->output, $var)) {
+            if (false !== strpos($name ?: '', $var) && false !== strpos($this->output ?: '', $var)) {
                 $name = str_replace($var, '', $name);
             }
         }

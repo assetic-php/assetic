@@ -1,5 +1,7 @@
 <?php namespace Assetic\Util;
 
+use Traversable;
+
 /**
  * An object that can be used as either a string or array.
  *
@@ -16,12 +18,12 @@ class TraversableString implements \IteratorAggregate, \Countable
         $this->many = $many;
     }
 
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new \ArrayIterator($this->many);
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->many);
     }

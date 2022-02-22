@@ -1,5 +1,6 @@
 <?php namespace Assetic\Filter;
 
+use Traversable;
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\Contracts\Filter\FilterInterface;
 
@@ -60,12 +61,12 @@ class FilterCollection implements FilterInterface, \IteratorAggregate, \Countabl
         }
     }
 
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new \ArrayIterator($this->filters);
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->filters);
     }

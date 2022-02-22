@@ -38,12 +38,12 @@ class CssImportFilter extends BaseCssFilter implements DependencyExtractorInterf
 
             $importRoot = $sourceRoot;
 
-            if (false !== strpos($matches['url'], '://')) {
+            if (false !== strpos($matches['url'] ?: '', '://')) {
                 // absolute
                 list($importScheme, $tmp) = explode('://', $matches['url'], 2);
                 list($importHost, $importPath) = explode('/', $tmp, 2);
                 $importRoot = $importScheme.'://'.$importHost;
-            } elseif (0 === strpos($matches['url'], '//')) {
+            } elseif (0 === strpos($matches['url'] ?: '', '//')) {
                 // protocol-relative
                 list($importHost, $importPath) = explode('/', substr($matches['url'], 2), 2);
                 $importRoot = '//'.$importHost;
@@ -61,9 +61,9 @@ class CssImportFilter extends BaseCssFilter implements DependencyExtractorInterf
             }
 
             $importSource = $importRoot.'/'.$importPath;
-            if (false !== strpos($importSource, '://') || 0 === strpos($importSource, '//')) {
+            if (false !== strpos($importSource ?: '', '://') || 0 === strpos($importSource ?: '', '//')) {
                 $import = new HttpAsset($importSource, array($importFilter), true);
-            } elseif ('css' != pathinfo($importPath, PATHINFO_EXTENSION) || !file_exists($importSource)) {
+            } elseif ('css' != pathinfo($importPath ?: '', PATHINFO_EXTENSION) || !file_exists($importSource)) {
                 // ignore non-css and non-existant imports
                 return $matches[0];
             } else {

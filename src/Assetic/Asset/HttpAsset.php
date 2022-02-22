@@ -25,9 +25,9 @@ class HttpAsset extends BaseAsset
      */
     public function __construct($sourceUrl, $filters = [], $ignoreErrors = false, array $vars = [])
     {
-        if (0 === strpos($sourceUrl, '//')) {
+        if (0 === strpos($sourceUrl ?: '', '//')) {
             $sourceUrl = 'http:'.$sourceUrl;
-        } elseif (false === strpos($sourceUrl, '://')) {
+        } elseif (false === strpos($sourceUrl ?: '', '://')) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid URL.', $sourceUrl));
         }
 

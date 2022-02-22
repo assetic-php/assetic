@@ -26,7 +26,7 @@ class CacheBustingWorker implements WorkerInterface
             return;
         }
 
-        if (!$search = pathinfo($path, PATHINFO_EXTENSION)) {
+        if (!$search = pathinfo($path ?: '', PATHINFO_EXTENSION)) {
             // nothing to replace
             return;
         }

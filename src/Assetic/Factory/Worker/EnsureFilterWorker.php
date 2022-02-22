@@ -41,9 +41,9 @@ class EnsureFilterWorker implements WorkerInterface
     public function process(AssetInterface $asset, AssetFactory $factory)
     {
         if (
-            (self::CHECK_SOURCE === (self::CHECK_SOURCE & $this->flags) && preg_match($this->pattern, $asset->getSourcePath()))
+            (self::CHECK_SOURCE === (self::CHECK_SOURCE & $this->flags) && preg_match($this->pattern, $asset->getSourcePath() ?: ''))
             ||
-            (self::CHECK_TARGET === (self::CHECK_TARGET & $this->flags) && preg_match($this->pattern, $asset->getTargetPath()))
+            (self::CHECK_TARGET === (self::CHECK_TARGET & $this->flags) && preg_match($this->pattern, $asset->getTargetPath() ?: ''))
         ) {
             $asset->ensureFilter($this->filter);
         }

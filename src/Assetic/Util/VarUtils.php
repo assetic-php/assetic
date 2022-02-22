@@ -22,7 +22,7 @@ abstract class VarUtils
     {
         $map = [];
         foreach ($vars as $var) {
-            if (false === strpos($template, '{'.$var.'}')) {
+            if (false === strpos($template ?: '', '{'.$var.'}')) {
                 continue;
             }
 

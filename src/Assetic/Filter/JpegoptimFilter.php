@@ -64,7 +64,7 @@ class JpegoptimFilter extends BaseProcessFilter
         $result = $this->runProcess($asset->getContent(), $args);
 
         // Check for any issues
-        if (strpos($result, 'ERROR') !== false) {
+        if (strpos($result ?: '', 'ERROR') !== false) {
             throw FilterException::fromProcess($this->getProcess())->setInput($asset->getContent());
         }
 

@@ -14,13 +14,13 @@ For example, you could create a file in your web directory at
 
 use Assetic\Asset\AssetCollection;
 use Assetic\Asset\FileAsset;
-use Assetic\Filter\JsMinFilter;
+use Assetic\Filter\JavaScriptMinifierFilter;
 
 $js = new AssetCollection(array(
     new FileAsset(__DIR__.'/jquery.js'),
     new FileAsset(__DIR__.'/application.js'),
 ), array(
-    new JsMinFilter(),
+    new JavaScriptMinifierFilter(),
 ));
 
 header('Content-Type: application/js');

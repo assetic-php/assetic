@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "php": ">=7.2.9 || ^8.0",
+        "php": ">=7.3 || ^8.0",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
@@ -36,13 +36,12 @@
         "scssphp/scssphp": "^1.0",
         "meenie/javascript-packer": "^1.1",
         "natxet/cssmin": "^3.0.6",
-        "patchwork/jsqueeze": "^1.0 || ^2.0",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5.8",
         "psr/log": "^1.0",
         "ptachoire/cssembed": "^1.0",
-        "symfony/phpunit-bridge": "~3.4 || ~4.0 || ~5.0",
+        "symfony/phpunit-bridge": "~3.4 || ~4.0 || ~5.0 || ~6.0",
         "twig/twig": "^2.11",
-        "twig/extensions": "^1.5"
+        "phpspec/prophecy-phpunit": "^2.0"
     },
     "suggest": {
         "wikimedia/less.php": "The Assetic\\Filter\\LessphpFilter requires wikimedia/less.php",
@@ -51,11 +50,10 @@
         "meenie/javascript-packer": "The Assetic\\Filter\\PackerFilter requires meenie/javascript-packer",
         "natxet/cssmin": "The Assetic\\Filter\\CssMinFilter requires natxet/cssmin",
         "ptachoire/cssembed": "The Assetic\\Filter\\PhpCssEmbedFilter requires ptachoire/cssembed",
-        "twig/twig": "Assetic provides an integration with the Twig templating engine",
-        "twig/extensions": "Assetic provides an integration with the Twig templating engine"
+        "twig/twig": "Assetic provides an integration with the Twig templating engine"
     },
     "replace": {
-        "kriswallsmith/assetic": "*"
+        "kriswallsmith/assetic": "1.4.0"
     },
     "autoload": {
         "psr-0": {

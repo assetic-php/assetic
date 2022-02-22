@@ -5,9 +5,12 @@ use Assetic\Extension\Twig\TwigResource;
 use Twig\Loader\LoaderInterface;
 use Twig\Loader\SourceContextLoaderInterface;
 use Twig\Error\LoaderError;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class TwigResourceTest extends TestCase
 {
+    use ProphecyTrait;
+
     protected function setUp(): void
     {
         if (!class_exists('Twig\Environment')) {

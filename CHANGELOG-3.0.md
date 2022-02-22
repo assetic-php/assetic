@@ -12,12 +12,13 @@ is to be kept as minimal as possible.
 
 ### New features
 
-* Support for `>=php 7.2`
+* Support for PHP 8.0 & PHP 8.1
 * Support for `symfony/process` `v3.4.x` | `v4.x` | `v5.x` | `v6.x`
+* Added `Assetic\Filter\JavaScriptMinifierFilter`
 
 ### BC breaks
 
-- Minimum PHP version required is now PHP 7.2.9
+- Minimum PHP version required is now PHP 7.3
 - Removed support for the unmaintained `mrclay/minify` and `patchwork/jsqueeze` packages in favour of `wikimedia/minify`.
 
 # Filters Removed:

@@ -9,7 +9,7 @@ use Assetic\Contracts\Cache\CacheInterface;
  */
 class FilesystemCache implements CacheInterface
 {
-    private $dir;
+    protected $dir;
 
     public function __construct($dir)
     {

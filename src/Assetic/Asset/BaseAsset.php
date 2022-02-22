@@ -138,7 +138,7 @@ abstract class BaseAsset implements AssetInterface
     {
         if ($this->vars) {
             foreach ($this->vars as $var) {
-                if (false === strpos($targetPath, $var)) {
+                if (false === strpos($targetPath ?: '', $var)) {
                     throw new \RuntimeException(sprintf('The asset target path "%s" must contain the variable "{%s}".', $targetPath, $var));
                 }
             }

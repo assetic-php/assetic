@@ -27,7 +27,7 @@ class AssetCollectionIterator implements RecursiveIterator
         $this->output  = $coll->getTargetPath();
         $this->clones  = $clones;
 
-        if (false === $pos = strrpos($this->output, '.')) {
+        if (false === $pos = strrpos($this->output ?: '', '.')) {
             $this->output .= '_*';
         } else {
             $this->output = substr($this->output, 0, $pos).'_*'.substr($this->output, $pos);
@@ -56,7 +56,7 @@ class AssetCollectionIterator implements RecursiveIterator
             $clone = $this->clones[$asset] = clone $asset;
 
             // generate a target path based on asset name
-            $name = sprintf('%s_%d', pathinfo($asset->getSourcePath(), PATHINFO_FILENAME) ?: 'part', $this->key() + 1);
+            $name = sprintf('%s_%d', pathinfo($asset->getSourcePath() ?: '', PATHINFO_FILENAME) ?: 'part', $this->key() + 1);
 
             $name = $this->removeDuplicateVar($name);
 
@@ -112,7 +112,7 @@ class AssetCollectionIterator implements RecursiveIterator
     {
         foreach ($this->vars as $var) {
             $var = '{'.$var.'}';
-            if (false !== strpos($name, $var) && false !== strpos($this->output, $var)) {
+            if (false !== strpos($name ?: '', $var) && false !== strpos($this->output ?: '', $var)) {
                 $name = str_replace($var, '', $name);
             }
         }

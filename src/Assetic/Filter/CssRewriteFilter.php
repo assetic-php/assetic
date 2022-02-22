@@ -20,12 +20,12 @@ class CssRewriteFilter extends BaseCssFilter
         }
 
         // learn how to get from the target back to the source
-        if (false !== strpos($sourceBase, '://')) {
+        if (false !== strpos($sourceBase ?: '', '://')) {
             list($scheme, $url) = explode('://', $sourceBase.'/'.$sourcePath, 2);
             list($host, $path) = explode('/', $url, 2);
 
             $host = $scheme.'://'.$host.'/';
-            $path = false === strpos($path, '/') ? '' : dirname($path);
+            $path = false === strpos($path ?: '', '/') ? '' : dirname($path);
             $path .= '/';
         } else {
             // assume source and target are on the same host
@@ -38,8 +38,8 @@ class CssRewriteFilter extends BaseCssFilter
                 $path = dirname($sourcePath).'/';
             } else {
                 $path = '';
-                while (0 !== strpos($sourcePath, $targetDir)) {
-                    if (false !== $pos = strrpos($targetDir, '/')) {
+                while (0 !== strpos($sourcePath ?: '', $targetDir)) {
+                    if (false !== $pos = strrpos($targetDir ?: '', '/')) {
                         $targetDir = substr($targetDir, 0, $pos);
                         $path .= '../';
                     } else {
@@ -53,10 +53,10 @@ class CssRewriteFilter extends BaseCssFilter
         }
 
         $content = $this->filterReferences($asset->getContent(), function ($matches) use ($host, $path) {
-            if (false !== strpos($matches['url'], '://')
-                || 0 === strpos($matches['url'], '//')
-                || 0 === strpos($matches['url'], 'data:')
-                || '#' === substr($matches['url'], 0, 1)
+            if (false !== strpos($matches['url'] ?: '', '://')
+                || 0 === strpos($matches['url'] ?: '', '//')
+                || 0 === strpos($matches['url'] ?: '', 'data:')
+                || '#' === substr($matches['url'] ?: '', 0, 1)
             ) {
                 // absolute or protocol-relative or data uri
                 return $matches[0];
@@ -69,8 +69,8 @@ class CssRewriteFilter extends BaseCssFilter
 
             // document relative
             $url = $matches['url'];
-            while (0 === strpos($url, '../') && 2 <= substr_count($path, '/')) {
-                $path = substr($path, 0, strrpos(rtrim($path, '/'), '/') + 1);
+            while (0 === strpos($url ?: '', '../') && 2 <= substr_count($path, '/')) {
+                $path = substr($path, 0, strrpos(rtrim($path ?: '', '/'), '/') + 1);
                 $url = substr($url, 3);
             }
 

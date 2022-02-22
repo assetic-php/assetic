@@ -29,3 +29,4 @@ is to be kept as minimal as possible.
         - https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port (last touched in 2018)
         - https://github.com/natxet/CssMin (last touched in 2018)
         - https://github.com/wikimedia/minify/blob/master/src/CSSMin.php (last touched in 2021, maintained by large company)
+        - https://github.com/natxet/CssMin (already implemented, not a lot of confidence in it)

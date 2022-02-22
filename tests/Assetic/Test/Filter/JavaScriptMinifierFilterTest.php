@@ -6,6 +6,7 @@ use Assetic\Filter\JavaScriptMinifierFilter;
 
 /**
  * @group integration
+ * @see https://github.com/wikimedia/minify/blob/master/tests/JavaScriptMinifierTest.php
  */
 class JavaScriptMinifierFilterTest extends TestCase
 {

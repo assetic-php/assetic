@@ -1,7 +1,5 @@
-v3.0.0 (2022-02-28)
+v3.0.0 (2022-02-22)
 ------------------
-
-### Project update
 
 Assetic v3 is another refresh of the project in order to keep the core lean and
 up to date with modern standards. More deprecated / abandoned filters have been

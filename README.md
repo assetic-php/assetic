@@ -78,7 +78,7 @@ The core provides the following filters in the `Assetic\Filter` namespace:
 
  * `CoffeeScriptFilter`: compiles CoffeeScript into Javascript
  * `CssImportFilter`: inlines imported stylesheets
- * `CssMinFilter`: minifies CSS
+ * `CSSMinFilter`: minifies CSS
  * `CssRewriteFilter`: fixes relative URLs in CSS assets when moving to a new URL
  * `GoogleClosure\CompilerApiFilter`: compiles Javascript using the Google Closure Compiler API
  * `HandlebarsFilter`: compiles Handlebars templates into Javascript
@@ -93,6 +93,7 @@ The core provides the following filters in the `Assetic\Filter` namespace:
  * `ReactJsxFilter`: compiles React JSX into JavaScript
  * `ScssphpFilter`: parses SCSS into CSS
  * `SeparatorFilter`: inserts a separator between assets to prevent merge failures
+ * `StylesheetMinifyFilter`: compresses stylesheet CSS files
  * `StylusFilter`: parses STYL into CSS
  * `TypeScriptFilter`: parses TypeScript into Javascript
  * `UglifyCssFilter`: minifies CSS

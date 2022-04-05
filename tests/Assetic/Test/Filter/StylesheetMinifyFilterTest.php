@@ -58,6 +58,18 @@ EOS;
         $this->assertEquals($output, $mockAsset->getContent());
     }
 
+    public function testUniversalSelectorFollowComment()
+    {
+        $input  = '/*! Keep me */*{box-sizing:border-box}/* Remove me */.noborder{border:0}';
+        $output = '/*! Keep me */*{box-sizing:border-box}.noborder{border:0}';
+
+        $mockAsset = new MockAsset($input);
+        $result = new StylesheetMinifyFilter();
+        $result->filterDump($mockAsset);
+
+        $this->assertEquals($output, $mockAsset->getContent());
+    }
+
     public function testCommentRemoval()
     {
         $input  = 'body{/* First comment */} /* Second comment */';

@@ -29,7 +29,7 @@ class StylesheetMinifyFilter extends BaseFilter
         $css = preg_replace('/(\s+)(\/\*[^!](.*?)\*\/)(\s+)/', '$2', $css);
 
         // Remove comment blocks, everything between /* and */, ignore /*! comments
-        $css = preg_replace('#/\*[^\!].*?\*/#s', '', $css);
+        $css = preg_replace('#/\*[^(\!|,|{)].*?\*/#s', '', $css);
 
         // Remove ; before }
         $css = preg_replace('/;(?=\s*})/', '', $css);

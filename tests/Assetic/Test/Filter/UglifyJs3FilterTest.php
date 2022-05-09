@@ -66,7 +66,7 @@ JS;
 /**
  * Copyright
  */
-"undefined"==typeof FOO&&(FOO=1),function(){new Array(FOO,2,3,4);var bar=Array(a,b,c),var2=(new Array(5),new Array(a));function bar(foo){return var2.push(foo),foo}bar("abc123")}();
+"undefined"==typeof FOO&&(FOO=1),function(){new Array(FOO,2,3,4);var bar=Array(a,b,c),var2=(new Array(5),new Array(a));function bar(foo){var2.push(foo)}bar("abc123")}();
 JS;
         $this->assertEquals($expected, $this->asset->getContent());
     }
@@ -81,7 +81,7 @@ JS;
 /**
  * Copyright
  */
-(function(){new Array(2,2,3,4);var bar=Array(a,b,c),var2=(new Array(5),new Array(a));function bar(foo){return var2.push(foo),foo}bar("abc123")})();
+!function(){new Array(2,2,3,4);var bar=Array(a,b,c),var2=(new Array(5),new Array(a));function bar(foo){var2.push(foo)}bar("abc123")}();
 JS;
         $this->assertEquals($expected, $this->asset->getContent());
     }
@@ -96,7 +96,7 @@ JS;
 /**
  * Copyright
  */
-"undefined"==typeof DEBUG&&(DEBUG=!0),"undefined"==typeof FOO&&(FOO=1),function(){FOO;var bar=[a,b,c],var2=Array(a);function bar(foo){return var2.push(foo),foo}DEBUG&&console.log("hellow world"),bar("abc123")}();
+"undefined"==typeof DEBUG&&(DEBUG=!0),"undefined"==typeof FOO&&(FOO=1),function(){FOO;var bar=[a,b,c],var2=Array(a);function bar(foo){var2.push(foo)}DEBUG&&console.log("hellow world"),bar("abc123")}();
 JS;
         $this->assertEquals($expected, $this->asset->getContent());
     }

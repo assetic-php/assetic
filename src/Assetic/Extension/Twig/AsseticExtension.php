@@ -45,7 +45,7 @@ class AsseticExtension extends AbstractExtension implements GlobalsInterface
         return $functions;
     }
 
-    public function getGlobals()
+    public function getGlobals(): array
     {
         return array(
             'assetic' => array(

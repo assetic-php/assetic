@@ -35,7 +35,7 @@ class TypeScriptFilter extends BaseNodeFilter
     {
         $args = [
             '{INPUT}',
-            '--out',
+            '--outFile',
             '{OUTPUT}'
         ];
 

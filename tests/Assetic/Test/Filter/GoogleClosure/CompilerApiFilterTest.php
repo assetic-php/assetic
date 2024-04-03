@@ -12,6 +12,8 @@ class CompilerApiFilterTest extends TestCase
 {
     public function testRoundTrip()
     {
+        $this->markTestSkipped("Google Closure Compiler REST API has been deprecated");
+
         $input = <<<EOF
 (function() {
 function unused(){}

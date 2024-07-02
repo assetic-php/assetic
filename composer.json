@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "php": ">=7.3 || ^8.0",
+        "php": ">=7.4 || ^8.0",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
@@ -31,7 +31,7 @@
         "symfony/deprecation-contracts": "^2.2.0"
     },
     "require-dev": {
-        "wikimedia/less.php": "~3.0.0",
+        "wikimedia/less.php": "^5.0",
         "wikimedia/minify": "~2.2",
         "scssphp/scssphp": "^1.0",
         "meenie/javascript-packer": "^1.1",

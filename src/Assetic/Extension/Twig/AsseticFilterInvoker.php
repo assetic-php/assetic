@@ -1,4 +1,6 @@
-<?php namespace Assetic\Extension\Twig;
+<?php
+
+namespace Assetic\Extension\Twig;
 
 /**
  * Filters a single asset.

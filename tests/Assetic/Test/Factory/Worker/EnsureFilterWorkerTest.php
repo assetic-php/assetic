@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Factory\Worker;
+<?php
+
+namespace Assetic\Test\Factory\Worker;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Filter\FilterInterface;

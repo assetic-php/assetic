@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Asset\FileAsset;
@@ -12,7 +14,7 @@ class CssImportFilterTest extends TestCase
      */
     public function testImport($filter1, $filter2)
     {
-        $asset = new FileAsset(__DIR__.'/fixtures/cssimport/main.css', [], __DIR__.'/fixtures/cssimport', 'main.css');
+        $asset = new FileAsset(__DIR__ . '/fixtures/cssimport/main.css', [], __DIR__ . '/fixtures/cssimport', 'main.css');
         $asset->setTargetPath('foo/bar.css');
         $asset->ensureFilter($filter1);
         $asset->ensureFilter($filter2);
@@ -50,13 +52,13 @@ CSS;
 
     public function testNonCssImport()
     {
-        $asset = new FileAsset(__DIR__.'/fixtures/cssimport/noncssimport.css', [], __DIR__.'/fixtures/cssimport', 'noncssimport.css');
+        $asset = new FileAsset(__DIR__ . '/fixtures/cssimport/noncssimport.css', [], __DIR__ . '/fixtures/cssimport', 'noncssimport.css');
         $asset->load();
 
         $filter = new CssImportFilter();
         $filter->filterLoad($asset);
 
-        $this->assertEquals(file_get_contents(__DIR__.'/fixtures/cssimport/noncssimport.css'), $asset->getContent(), '->filterLoad() skips non css');
+        $this->assertEquals(file_get_contents(__DIR__ . '/fixtures/cssimport/noncssimport.css'), $asset->getContent(), '->filterLoad() skips non css');
     }
 
     /**
@@ -64,7 +66,7 @@ CSS;
      */
     public function testCommentedImport($filter1, $filter2)
     {
-        $asset = new FileAsset(__DIR__.'/fixtures/cssimport/commentedimport.css', [], __DIR__.'/fixtures/cssimport', 'commentedimport.css');
+        $asset = new FileAsset(__DIR__ . '/fixtures/cssimport/commentedimport.css', [], __DIR__ . '/fixtures/cssimport', 'commentedimport.css');
         $asset->setTargetPath('foo/bar.css');
         $asset->ensureFilter($filter1);
         $asset->ensureFilter($filter2);

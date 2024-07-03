@@ -1,4 +1,6 @@
-<?php namespace Assetic\Util;
+<?php
+
+namespace Assetic\Util;
 
 /**
  * Filesystem utilities.

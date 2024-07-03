@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Util;
+<?php
+
+namespace Assetic\Test\Util;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Util\SassUtils;

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Extension\Twig;
+<?php
+
+namespace Assetic\Extension\Twig;
 
 use Assetic\Contracts\Factory\Loader\FormulaLoaderInterface;
 use Assetic\Contracts\Factory\Resource\ResourceInterface;

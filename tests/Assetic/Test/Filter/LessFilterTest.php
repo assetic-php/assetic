@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use Assetic\Asset\FileAsset;
 use Assetic\Asset\StringAsset;
@@ -59,7 +61,7 @@ class LessFilterTest extends FilterTestCase
 
 EOF;
 
-        $asset = new FileAsset(__DIR__.'/fixtures/less/main.less');
+        $asset = new FileAsset(__DIR__ . '/fixtures/less/main.less');
         $asset->load();
 
         $this->filter->filterLoad($asset);
@@ -73,7 +75,7 @@ EOF;
 .foo{color:blue}.foo{color:red}
 EOF;
 
-        $asset = new FileAsset(__DIR__.'/fixtures/less/main.less');
+        $asset = new FileAsset(__DIR__ . '/fixtures/less/main.less');
         $asset->load();
 
         $this->filter->setCompress(true);
@@ -94,7 +96,7 @@ EOF;
 
 EOF;
 
-        $this->filter->addLoadPath(__DIR__.'/fixtures/less');
+        $this->filter->addLoadPath(__DIR__ . '/fixtures/less');
 
         $asset = new StringAsset('@import "main";');
         $asset->load();
@@ -120,8 +122,8 @@ EOF;
 EOF;
 
         $this->filter->setLoadPaths(array(
-            __DIR__.'/fixtures/less',
-            __DIR__.'/fixtures/less/import_path',
+            __DIR__ . '/fixtures/less',
+            __DIR__ . '/fixtures/less/import_path',
         ));
 
         $asset = new StringAsset('@import "main"; @import "_import"; .bar {color: @red}');
@@ -137,7 +139,7 @@ EOF;
      */
     public function testGetChildren($import)
     {
-        $children = $this->filter->getChildren(new AssetFactory('/'), $import, __DIR__.'/fixtures/less');
+        $children = $this->filter->getChildren(new AssetFactory('/'), $import, __DIR__ . '/fixtures/less');
 
         $this->assertCount(1, $children);
         $this->assertEquals('main.less', $children[0]->getSourcePath());

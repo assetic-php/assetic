@@ -1,4 +1,6 @@
-<?php namespace Assetic\Asset;
+<?php
+
+namespace Assetic\Asset;
 
 use Assetic\Contracts\Cache\CacheInterface;
 use Assetic\Contracts\Filter\FilterInterface;
@@ -159,6 +161,6 @@ class AssetCache implements AssetInterface
             $cacheKey .= serialize($values);
         }
 
-        return md5($cacheKey.$salt);
+        return md5($cacheKey . $salt);
     }
 }

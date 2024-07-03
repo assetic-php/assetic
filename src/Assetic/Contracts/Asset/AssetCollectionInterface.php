@@ -1,4 +1,6 @@
-<?php namespace Assetic\Contracts\Asset;
+<?php
+
+namespace Assetic\Contracts\Asset;
 
 /**
  * An asset collection.

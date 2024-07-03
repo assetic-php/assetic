@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Asset\FileAsset;
@@ -18,7 +20,7 @@ class PackerFilterTest extends TestCase
 
     public function testPacker()
     {
-        $asset = new FileAsset(__DIR__.'/fixtures/packer/example.js');
+        $asset = new FileAsset(__DIR__ . '/fixtures/packer/example.js');
         $asset->load();
 
         $filter = new PackerFilter();

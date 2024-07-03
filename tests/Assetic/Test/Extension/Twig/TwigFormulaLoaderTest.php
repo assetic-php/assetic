@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Extension\Twig;
+<?php
+
+namespace Assetic\Test\Extension\Twig;
 
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\Contracts\Factory\Resource\ResourceInterface;
@@ -29,7 +31,7 @@ class TwigFormulaLoaderTest extends TestCase
         $this->am = $this->getMockBuilder(AssetManager::class)->getMock();
         $this->fm = $this->getMockBuilder(FilterManager::class)->getMock();
 
-        $factory = new AssetFactory(__DIR__.'/templates');
+        $factory = new AssetFactory(__DIR__ . '/templates');
         $factory->setAssetManager($this->am);
         $factory->setFilterManager($this->fm);
 
@@ -71,7 +73,7 @@ class TwigFormulaLoaderTest extends TestCase
         $resource = $this->getMockBuilder(ResourceInterface::class)->getMock();
         $resource->expects($this->once())
             ->method('getContent')
-            ->will($this->returnValue(file_get_contents(__DIR__.'/templates/mixture.twig')));
+            ->will($this->returnValue(file_get_contents(__DIR__ . '/templates/mixture.twig')));
         $this->am->expects($this->any())
             ->method('get')
             ->with('foo')
@@ -97,7 +99,7 @@ class TwigFormulaLoaderTest extends TestCase
         $resource = $this->getMockBuilder(ResourceInterface::class)->getMock();
         $resource->expects($this->once())
             ->method('getContent')
-            ->will($this->returnValue(file_get_contents(__DIR__.'/templates/function.twig')));
+            ->will($this->returnValue(file_get_contents(__DIR__ . '/templates/function.twig')));
 
         $formulae = $this->loader->load($resource);
         $this->assertEquals($expected, $formulae);
@@ -108,7 +110,7 @@ class TwigFormulaLoaderTest extends TestCase
         $resource = $this->getMockBuilder(ResourceInterface::class)->getMock();
         $resource->expects($this->once())
             ->method('getContent')
-            ->will($this->returnValue(file_get_contents(__DIR__.'/templates/unclosed_tag.twig')));
+            ->will($this->returnValue(file_get_contents(__DIR__ . '/templates/unclosed_tag.twig')));
 
         $formulae = $this->loader->load($resource);
         $this->assertEquals([], $formulae);
@@ -133,7 +135,7 @@ class TwigFormulaLoaderTest extends TestCase
         $resource = $this->getMockBuilder(ResourceInterface::class)->getMock();
         $resource->expects($this->once())
             ->method('getContent')
-            ->will($this->returnValue(file_get_contents(__DIR__.'/templates/embed.twig')));
+            ->will($this->returnValue(file_get_contents(__DIR__ . '/templates/embed.twig')));
 
         $formulae = $this->loader->load($resource);
         $this->assertEquals($expected, $formulae);

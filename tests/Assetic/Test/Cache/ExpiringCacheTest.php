@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Cache;
+<?php
+
+namespace Assetic\Test\Cache;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Cache\CacheInterface;

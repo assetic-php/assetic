@@ -1,4 +1,6 @@
-<?php namespace Assetic\Asset;
+<?php
+
+namespace Assetic\Asset;
 
 use Assetic\Contracts\Filter\FilterInterface;
 use Assetic\Util\VarUtils;
@@ -26,7 +28,7 @@ class HttpAsset extends BaseAsset
     public function __construct($sourceUrl, $filters = [], $ignoreErrors = false, array $vars = [])
     {
         if (0 === strpos($sourceUrl ?: '', '//')) {
-            $sourceUrl = 'http:'.$sourceUrl;
+            $sourceUrl = 'http:' . $sourceUrl;
         } elseif (false === strpos($sourceUrl ?: '', '://')) {
             throw new \InvalidArgumentException(sprintf('"%s" is not a valid URL.', $sourceUrl));
         }
@@ -37,7 +39,7 @@ class HttpAsset extends BaseAsset
         list($scheme, $url) = explode('://', $sourceUrl, 2);
         list($host, $path) = explode('/', $url, 2);
 
-        parent::__construct($filters, $scheme.'://'.$host, $path, $vars);
+        parent::__construct($filters, $scheme . '://' . $host, $path, $vars);
     }
 
     public function load(FilterInterface $additionalFilter = null)

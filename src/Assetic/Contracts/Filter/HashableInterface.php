@@ -1,4 +1,6 @@
-<?php namespace Assetic\Contracts\Filter;
+<?php
+
+namespace Assetic\Contracts\Filter;
 
 /**
  * A filter can implement a hash function

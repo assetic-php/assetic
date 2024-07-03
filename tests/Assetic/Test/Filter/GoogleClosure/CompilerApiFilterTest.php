@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter\GoogleClosure;
+<?php
+
+namespace Assetic\Test\Filter\GoogleClosure;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Asset\StringAsset;

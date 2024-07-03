@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Factory;
+<?php
+
+namespace Assetic\Test\Factory;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Factory\Resource\ResourceInterface;

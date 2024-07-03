@@ -1,4 +1,6 @@
-<?php namespace Assetic\Extension\Twig;
+<?php
+
+namespace Assetic\Extension\Twig;
 
 use Assetic\Contracts\Asset\AssetInterface;
 use Twig\Compiler;
@@ -85,7 +87,7 @@ class AsseticNode extends Node
     {
         $i = 0;
         foreach ($this->getAttribute('asset') as $leaf) {
-            $leafName = $this->getAttribute('name').'_'.$i++;
+            $leafName = $this->getAttribute('name') . '_' . $i++;
             $this->compileAsset($compiler, $leaf, $leafName);
         }
     }
@@ -99,7 +101,7 @@ class AsseticNode extends Node
                 $compiler
                     ->write("if (!isset(\$context['assetic']['vars']['$var'])) {\n")
                     ->indent()
-                    ->write("throw new \RuntimeException(sprintf('The asset \"".$name."\" expected variable \"".$var."\" to be set, but got only these vars: %s. Did you set-up a value supplier?', isset(\$context['assetic']['vars']) && \$context['assetic']['vars'] ? implode(', ', \$context['assetic']['vars']) : '# none #'));\n")
+                    ->write("throw new \RuntimeException(sprintf('The asset \"" . $name . "\" expected variable \"" . $var . "\" to be set, but got only these vars: %s. Did you set-up a value supplier?', isset(\$context['assetic']['vars']) && \$context['assetic']['vars'] ? implode(', ', \$context['assetic']['vars']) : '# none #'));\n")
                     ->outdent()
                     ->write("}\n")
                 ;
@@ -144,7 +146,7 @@ class AsseticNode extends Node
             $first = false;
 
             $compiler
-                ->string("{".$var."}")
+                ->string("{" . $var . "}")
                 ->raw(" => \$context['assetic']['vars']['$var']")
             ;
         }

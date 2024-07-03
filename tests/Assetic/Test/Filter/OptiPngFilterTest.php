@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use Assetic\Asset\FileAsset;
 use Assetic\Filter\OptiPngFilter;
@@ -43,8 +45,8 @@ class OptiPngFilterTest extends FilterTestCase
     public function getImages()
     {
         return array(
-            array(__DIR__.'/fixtures/home.gif'),
-            array(__DIR__.'/fixtures/home.png'),
+            array(__DIR__ . '/fixtures/home.gif'),
+            array(__DIR__ . '/fixtures/home.png'),
         );
     }
 }

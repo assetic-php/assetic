@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Factory\Resource;
+<?php
+
+namespace Assetic\Test\Factory\Resource;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Factory\Resource\ResourceInterface;
@@ -64,7 +66,7 @@ class DirectoryResourceTest extends TestCase
 
     public function testRecursiveIteration()
     {
-        $resource = new DirectoryResource(realpath(__DIR__.'/..'), '/^'.preg_quote(basename(__FILE__)).'$/');
+        $resource = new DirectoryResource(realpath(__DIR__ . '/..'), '/^' . preg_quote(basename(__FILE__)) . '$/');
 
         $this->assertCount(1, $resource);
     }
@@ -82,35 +84,35 @@ class DirectoryResourceTest extends TestCase
     {
         return array(
             array(__DIR__),
-            array(__DIR__.DIRECTORY_SEPARATOR),
+            array(__DIR__ . DIRECTORY_SEPARATOR),
         );
     }
 
     public function testInvalidDirectory()
     {
-        $resource = new DirectoryResource(__DIR__.'foo');
+        $resource = new DirectoryResource(__DIR__ . 'foo');
         $this->assertEquals(0, iterator_count($resource), 'works for non-existent directory');
     }
 
     public function testFollowSymlinks()
     {
         // Create the symlink if it doesn't already exist yet (if someone broke the entire testsuite perhaps)
-        if (!is_dir(__DIR__.'/Fixtures/dir3')) {
-            symlink(__DIR__.'/Fixtures/dir2', __DIR__.'/Fixtures/dir3');
+        if (!is_dir(__DIR__ . '/Fixtures/dir3')) {
+            symlink(__DIR__ . '/Fixtures/dir2', __DIR__ . '/Fixtures/dir3');
         }
 
-        $resource = new DirectoryResource(__DIR__.'/Fixtures');
+        $resource = new DirectoryResource(__DIR__ . '/Fixtures');
 
         $this->assertCount(7, $resource);
     }
 
     protected function tearDown(): void
     {
-        if (is_dir(__DIR__.'/Fixtures/dir3') && is_link(__DIR__.'/Fixtures/dir3')) {
+        if (is_dir(__DIR__ . '/Fixtures/dir3') && is_link(__DIR__ . '/Fixtures/dir3')) {
             if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
-                rmdir(__DIR__.'/Fixtures/dir3');
+                rmdir(__DIR__ . '/Fixtures/dir3');
             } else {
-                unlink(__DIR__.'/Fixtures/dir3');
+                unlink(__DIR__ . '/Fixtures/dir3');
             }
         }
     }

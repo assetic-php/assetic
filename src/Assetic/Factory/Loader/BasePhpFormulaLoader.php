@@ -1,4 +1,6 @@
-<?php namespace Assetic\Factory\Loader;
+<?php
+
+namespace Assetic\Factory\Loader;
 
 use Assetic\Factory\AssetFactory;
 use Assetic\Contracts\Factory\Resource\ResourceInterface;
@@ -27,7 +29,7 @@ abstract class BasePhpFormulaLoader implements FormulaLoaderInterface
 
     public function addPrototype($prototype, array $options = [])
     {
-        $tokens = token_get_all('<?php '.$prototype);
+        $tokens = token_get_all('<?php ' . $prototype);
         array_shift($tokens);
 
         $this->prototypes[$prototype] = array($tokens, $options);
@@ -68,7 +70,7 @@ abstract class BasePhpFormulaLoader implements FormulaLoaderInterface
                     $buffer .= $current;
 
                     if (!$level) {
-                        $calls[] = array($buffer.';', $options);
+                        $calls[] = array($buffer . ';', $options);
                         $buffer = '';
                         unset($buffersInWildcard[$i]);
                     }
@@ -103,7 +105,7 @@ abstract class BasePhpFormulaLoader implements FormulaLoaderInterface
             $call,
             'echo serialize($_call);',
         )));
-        $args = unserialize(shell_exec('php '.escapeshellarg($tmp)));
+        $args = unserialize(shell_exec('php ' . escapeshellarg($tmp)));
         unlink($tmp);
 
         $inputs  = isset($args[0]) ? self::argumentToArray($args[0]) : [];

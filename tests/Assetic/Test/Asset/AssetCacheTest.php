@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Asset;
+<?php
+
+namespace Assetic\Test\Asset;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Asset\AssetInterface;

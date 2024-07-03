@@ -1,4 +1,6 @@
-<?php namespace Assetic\Factory\Loader;
+<?php
+
+namespace Assetic\Factory\Loader;
 
 use Assetic\Cache\ConfigCache;
 use Assetic\Contracts\Factory\Resource\IteratorResourceInterface;

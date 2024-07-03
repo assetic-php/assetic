@@ -1,4 +1,6 @@
-<?php namespace Assetic\Filter\GoogleClosure;
+<?php
+
+namespace Assetic\Filter\GoogleClosure;
 
 use Assetic\Contracts\Asset\AssetInterface;
 
@@ -10,7 +12,7 @@ use Assetic\Contracts\Asset\AssetInterface;
  */
 class CompilerApiFilter extends BaseCompilerFilter
 {
-    const CLOSURE_COMPILER_API = 'https://closure-compiler.appspot.com/compile';
+    public const CLOSURE_COMPILER_API = 'https://closure-compiler.appspot.com/compile';
 
     private $proxy;
     private $proxyFullUri;
@@ -76,7 +78,7 @@ class CompilerApiFilter extends BaseCompilerFilter
             }
             if ($this->proxy) {
                 $contextOptions['http']['proxy'] = $this->proxy;
-                $contextOptions['http']['request_fulluri'] = (Boolean) $this->proxyFullUri;
+                $contextOptions['http']['request_fulluri'] = (bool) $this->proxyFullUri;
             }
             $context = stream_context_create($contextOptions);
 
@@ -106,13 +108,13 @@ class CompilerApiFilter extends BaseCompilerFilter
 
         if (isset($data->serverErrors) && 0 < count($data->serverErrors)) {
             // @codeCoverageIgnoreStart
-            throw new \RuntimeException(sprintf('The Google Closure Compiler API threw some server errors: '.print_r($data->serverErrors, true)));
+            throw new \RuntimeException(sprintf('The Google Closure Compiler API threw some server errors: ' . print_r($data->serverErrors, true)));
             // @codeCoverageIgnoreEnd
         }
 
         if (isset($data->errors) && 0 < count($data->errors)) {
             // @codeCoverageIgnoreStart
-            throw new \RuntimeException(sprintf('The Google Closure Compiler API threw some errors: '.print_r($data->errors, true)));
+            throw new \RuntimeException(sprintf('The Google Closure Compiler API threw some errors: ' . print_r($data->errors, true)));
             // @codeCoverageIgnoreEnd
         }
 

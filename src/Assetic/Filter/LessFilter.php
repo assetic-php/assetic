@@ -1,4 +1,6 @@
-<?php namespace Assetic\Filter;
+<?php
+
+namespace Assetic\Filter;
 
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\Contracts\Filter\DependencyExtractorInterface;
@@ -125,7 +127,7 @@ class LessFilter extends BaseNodeFilter implements DependencyExtractorInterface
             }
 
             foreach ($loadPaths as $loadPath) {
-                if (file_exists($file = $loadPath.'/'.$reference)) {
+                if (file_exists($file = $loadPath . '/' . $reference)) {
                     $coll = $factory->createAsset($file, [], array('root' => $loadPath));
                     foreach ($coll as $leaf) {
                         $leaf->ensureFilter($this);

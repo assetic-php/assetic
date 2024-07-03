@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Factory\Resource;
+<?php
+
+namespace Assetic\Test\Factory\Resource;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Factory\Resource\FileResource;
@@ -20,13 +22,13 @@ class FileResourceTest extends TestCase
 
     public function testIsFreshOnInvalidPath()
     {
-        $resource = new FileResource(__FILE__.'foo');
+        $resource = new FileResource(__FILE__ . 'foo');
         $this->assertFalse($resource->isFresh(time()), '->isFresh() returns false if the file does not exist');
     }
 
     public function testGetContentOnInvalidPath()
     {
-        $resource = new FileResource(__FILE__.'foo');
+        $resource = new FileResource(__FILE__ . 'foo');
         $this->assertSame('', $resource->getContent(), '->getContent() returns an empty string when path is invalid');
     }
 }

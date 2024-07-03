@@ -1,4 +1,6 @@
-<?php namespace Assetic\Contracts\Factory\Worker;
+<?php
+
+namespace Assetic\Contracts\Factory\Worker;
 
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\Factory\AssetFactory;

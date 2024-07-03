@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test;
+<?php
+
+namespace Assetic\Test;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Filter\FilterInterface;

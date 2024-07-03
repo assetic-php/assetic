@@ -1,4 +1,6 @@
-<?php namespace Assetic\Asset;
+<?php
+
+namespace Assetic\Asset;
 
 use Traversable;
 use Assetic\Asset\Iterator\AssetCollectionFilterIterator;

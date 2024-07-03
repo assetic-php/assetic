@@ -1,4 +1,6 @@
-<?php namespace Assetic\Filter;
+<?php
+
+namespace Assetic\Filter;
 
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\Exception\FilterException;
@@ -98,7 +100,7 @@ class UglifyJs3Filter extends BaseNodeFilter
 
             if ($this->comments === true && !$this->noCopyright) {
                 $args[] = 'all';
-            } else if (is_string($this->comments)) {
+            } elseif (is_string($this->comments)) {
                 $args[] = $this->comments;
             }
         }

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Contracts\Factory\Resource;
+<?php
+
+namespace Assetic\Contracts\Factory\Resource;
 
 /**
  * A resource is something formulae can be loaded from.

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Contracts\Cache;
+<?php
+
+namespace Assetic\Contracts\Cache;
 
 /**
  * Interface for a cache backend.

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Filter;
+<?php
+
+namespace Assetic\Filter;
 
 use Traversable;
 use Assetic\Contracts\Asset\AssetInterface;

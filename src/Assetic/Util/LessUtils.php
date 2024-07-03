@@ -1,4 +1,6 @@
-<?php namespace Assetic\Util;
+<?php
+
+namespace Assetic\Util;
 
 /**
  * Less Utils.
@@ -7,7 +9,7 @@
  */
 abstract class LessUtils extends CssUtils
 {
-    const REGEX_IMPORTS         = '/@import(?:-once)? (?:\([a-z]*\) )?(?:url\()?(\'|"|)(?P<url>[^\'"\)\n\r]*)\1\)?;?/';
-    const REGEX_IMPORTS_NO_URLS = '/@import(?:-once)? (?:\([a-z]*\) )?(?!url\()(\'|"|)(?P<url>[^\'"\)\n\r]*)\1;?/';
-    const REGEX_COMMENTS        = '/((?:\/\*[^*]*\*+(?:[^\/][^*]*\*+)*\/)|\/\/[^\n]+)/';
+    public const REGEX_IMPORTS         = '/@import(?:-once)? (?:\([a-z]*\) )?(?:url\()?(\'|"|)(?P<url>[^\'"\)\n\r]*)\1\)?;?/';
+    public const REGEX_IMPORTS_NO_URLS = '/@import(?:-once)? (?:\([a-z]*\) )?(?!url\()(\'|"|)(?P<url>[^\'"\)\n\r]*)\1;?/';
+    public const REGEX_COMMENTS        = '/((?:\/\*[^*]*\*+(?:[^\/][^*]*\*+)*\/)|\/\/[^\n]+)/';
 }

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Factory\Loader;
+<?php
+
+namespace Assetic\Test\Factory\Loader;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Factory\Resource\ResourceInterface;
@@ -20,7 +22,7 @@ class FunctionCallsFormulaLoaderTest extends TestCase
 
         $resource->expects($this->once())
             ->method('getContent')
-            ->will($this->returnValue('<?php '.$function.'('.$inputs.') ?>'));
+            ->will($this->returnValue('<?php ' . $function . '(' . $inputs . ') ?>'));
         $factory->expects($this->once())
             ->method('generateAssetName')
             ->will($this->returnValue($name));
@@ -44,9 +46,9 @@ class FunctionCallsFormulaLoaderTest extends TestCase
 
     public function testComplexFormula()
     {
-        $factory  = new AssetFactory(__DIR__.'/templates', true);
+        $factory  = new AssetFactory(__DIR__ . '/templates', true);
         $loader   = new FunctionCallsFormulaLoader($factory);
-        $resource = new FileResource(__DIR__.'/templates/debug.php');
+        $resource = new FileResource(__DIR__ . '/templates/debug.php');
         $formulae = $loader->load($resource);
 
         $this->assertEquals(array(

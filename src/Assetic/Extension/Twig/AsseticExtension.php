@@ -1,4 +1,6 @@
-<?php namespace Assetic\Extension\Twig;
+<?php
+
+namespace Assetic\Extension\Twig;
 
 use Assetic\Factory\AssetFactory;
 use Assetic\Contracts\ValueSupplierInterface;

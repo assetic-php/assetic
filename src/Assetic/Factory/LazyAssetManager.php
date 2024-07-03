@@ -1,4 +1,6 @@
-<?php namespace Assetic\Factory;
+<?php
+
+namespace Assetic\Factory;
 
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\AssetManager;
@@ -139,7 +141,7 @@ class LazyAssetManager extends AssetManager
         }
 
         if ($diff = array_diff(array_keys($this->resources), array_keys($this->loaders))) {
-            throw new \LogicException('The following loader(s) are not registered: '.implode(', ', $diff));
+            throw new \LogicException('The following loader(s) are not registered: ' . implode(', ', $diff));
         }
 
         $this->loading = true;

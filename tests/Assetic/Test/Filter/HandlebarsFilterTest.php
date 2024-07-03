@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use Assetic\Asset\FileAsset;
 use Assetic\Asset\StringAsset;
@@ -30,7 +32,7 @@ class HandlebarsFilterTest extends FilterTestCase
 
     public function testHandlebars()
     {
-        $asset = new FileAsset(__DIR__.'/fixtures/handlebars/template.handlebars');
+        $asset = new FileAsset(__DIR__ . '/fixtures/handlebars/template.handlebars');
         $asset->load();
 
         $this->filter->filterLoad($asset);
@@ -41,7 +43,7 @@ class HandlebarsFilterTest extends FilterTestCase
 
     public function testSimpleHandlebars()
     {
-        $asset = new FileAsset(__DIR__.'/fixtures/handlebars/template.handlebars');
+        $asset = new FileAsset(__DIR__ . '/fixtures/handlebars/template.handlebars');
         $asset->load();
 
         $this->filter->setSimple(true);
@@ -53,7 +55,7 @@ class HandlebarsFilterTest extends FilterTestCase
 
     public function testMinimizeHandlebars()
     {
-        $asset = new FileAsset(__DIR__.'/fixtures/handlebars/template.handlebars');
+        $asset = new FileAsset(__DIR__ . '/fixtures/handlebars/template.handlebars');
         $asset->load();
 
         $this->filter->setMinimize(true);
@@ -65,7 +67,7 @@ class HandlebarsFilterTest extends FilterTestCase
 
     public function testStringAssset()
     {
-        $asset = new StringAsset(file_get_contents(__DIR__.'/fixtures/handlebars/template.handlebars'));
+        $asset = new StringAsset(file_get_contents(__DIR__ . '/fixtures/handlebars/template.handlebars'));
         $asset->load();
 
         $this->filter->filterLoad($asset);

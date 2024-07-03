@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Factory\Loader;
+<?php
+
+namespace Assetic\Test\Factory\Loader;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Factory\Loader\FormulaLoaderInterface;

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Util;
+<?php
+
+namespace Assetic\Util;
 
 /**
  * Sass Utils.
@@ -7,5 +9,5 @@
  */
 abstract class SassUtils extends CssUtils
 {
-    const REGEX_COMMENTS = '/((?:\/\*[^*]*\*+(?:[^\/][^*]*\*+)*\/)|\/\/[^\n]+)/';
+    public const REGEX_COMMENTS = '/((?:\/\*[^*]*\*+(?:[^\/][^*]*\*+)*\/)|\/\/[^\n]+)/';
 }

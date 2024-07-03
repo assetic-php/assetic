@@ -1,4 +1,6 @@
-<?php namespace Assetic\Filter;
+<?php
+
+namespace Assetic\Filter;
 
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\Contracts\Filter\FilterInterface;

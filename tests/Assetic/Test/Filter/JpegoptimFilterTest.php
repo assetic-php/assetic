@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use Assetic\Asset\FileAsset;
 use Assetic\Filter\JpegoptimFilter;
@@ -26,7 +28,7 @@ class JpegoptimFilterTest extends FilterTestCase
 
     public function testFilter()
     {
-        $asset = new FileAsset(__DIR__.'/fixtures/home.jpg');
+        $asset = new FileAsset(__DIR__ . '/fixtures/home.jpg');
         $asset->load();
 
         $before = $asset->getContent();

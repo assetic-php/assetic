@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Asset\FileAsset;
@@ -49,7 +51,7 @@ EOF;
 
 EOF;
 
-        $asset = new FileAsset(__DIR__.'/fixtures/sass/main.scss');
+        $asset = new FileAsset(__DIR__ . '/fixtures/sass/main.scss');
         $asset->load();
 
         $this->getFilter()->filterLoad($asset);
@@ -60,7 +62,7 @@ EOF;
     public function testSetImportPath()
     {
         $filter = $this->getFilter();
-        $filter->addImportPath(__DIR__.'/fixtures/sass/import_path');
+        $filter->addImportPath(__DIR__ . '/fixtures/sass/import_path');
 
         $asset = new StringAsset("@import 'import';\n#test { color: \$red }");
         $asset->load();
@@ -169,17 +171,17 @@ EOF;
         $factory = new AssetFactory('');
 
         $filter = $this->getFilter();
-        $children = $filter->getChildren($factory, '@import "main";', __DIR__.'/fixtures/sass');
+        $children = $filter->getChildren($factory, '@import "main";', __DIR__ . '/fixtures/sass');
 
         $this->assertCount(2, $children);
     }
 
     public function testGetChildrenEmptyPath()
     {
-        $factory = new AssetFactory(__DIR__.'/fixtures/sass');
+        $factory = new AssetFactory(__DIR__ . '/fixtures/sass');
 
         $filter = $this->getFilter();
-        $filter->addImportPath(__DIR__.'/fixtures/sass');
+        $filter->addImportPath(__DIR__ . '/fixtures/sass');
 
         $children = $filter->getChildren($factory, '@import "main";');
 

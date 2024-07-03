@@ -1,4 +1,6 @@
-<?php namespace Assetic\Exception;
+<?php
+
+namespace Assetic\Exception;
 
 use Assetic\Contracts\Exception\Exception;
 use Symfony\Component\Process\Process;
@@ -19,12 +21,12 @@ class FilterException extends \RuntimeException implements Exception
 
         $errorOutput = $proc->getErrorOutput();
         if (!empty($errorOutput)) {
-            $message .= "\n\nError Output:\n".str_replace("\r", '', $errorOutput);
+            $message .= "\n\nError Output:\n" . str_replace("\r", '', $errorOutput);
         }
 
         $output = $proc->getOutput();
         if (!empty($output)) {
-            $message .= "\n\nOutput:\n".str_replace("\r", '', $output);
+            $message .= "\n\nOutput:\n" . str_replace("\r", '', $output);
         }
 
         return new self($message);
@@ -55,7 +57,7 @@ class FilterException extends \RuntimeException implements Exception
         $message = $this->originalMessage;
 
         if (!empty($this->input)) {
-            $message .= "\n\nInput:\n".$this->input;
+            $message .= "\n\nInput:\n" . $this->input;
         }
 
         $this->message = $message;

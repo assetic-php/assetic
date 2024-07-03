@@ -1,4 +1,6 @@
-<?php namespace Assetic\Factory\Loader;
+<?php
+
+namespace Assetic\Factory\Loader;
 
 /**
  * Loads asset formulae from PHP files.

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Filter;
+<?php
+
+namespace Assetic\Filter;
 
 use Assetic\Util\FilesystemUtils;
 use Assetic\Exception\FilterException;

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Extension\Twig;
+<?php
+
+namespace Assetic\Test\Extension\Twig;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Asset\AssetInterface;
@@ -53,11 +55,11 @@ class AsseticExtensionTest extends TestCase
 
         $this->valueSupplier = $this->getMockBuilder(ValueSupplierInterface::class)->getMock();
 
-        $this->factory = new AssetFactory(__DIR__.'/templates');
+        $this->factory = new AssetFactory(__DIR__ . '/templates');
         $this->factory->setAssetManager($this->am);
         $this->factory->setFilterManager($this->fm);
 
-        $this->twig = new Environment(new FilesystemLoader(__DIR__.'/templates'));
+        $this->twig = new Environment(new FilesystemLoader(__DIR__ . '/templates'));
         $this->twig->addExtension(new AsseticExtension($this->factory, [], $this->valueSupplier));
     }
 
@@ -204,7 +206,7 @@ class AsseticExtensionTest extends TestCase
             ->with('some_filter')
             ->will($this->returnValue($filter));
 
-        $this->twig = new Environment(new FilesystemLoader(__DIR__.'/templates'));
+        $this->twig = new Environment(new FilesystemLoader(__DIR__ . '/templates'));
         $this->twig->addExtension(new AsseticExtension($this->factory, array(
             'some_func' => array(
                 'filter' => 'some_filter',
@@ -232,7 +234,7 @@ class AsseticExtensionTest extends TestCase
     public function testMultipleSameVariableValues()
     {
         $vars = array('locale');
-        $asset = new FileAsset(__DIR__.'/../Fixture/messages.{locale}.js', [], null, null, $vars);
+        $asset = new FileAsset(__DIR__ . '/../Fixture/messages.{locale}.js', [], null, null, $vars);
 
         $coll = new AssetCollection(array($asset), [], null, $vars);
 

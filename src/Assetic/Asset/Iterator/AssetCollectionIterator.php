@@ -1,4 +1,6 @@
-<?php namespace Assetic\Asset\Iterator;
+<?php
+
+namespace Assetic\Asset\Iterator;
 
 use RecursiveIterator;
 use Assetic\Contracts\Asset\AssetCollectionInterface;
@@ -30,7 +32,7 @@ class AssetCollectionIterator implements RecursiveIterator
         if (false === $pos = strrpos($this->output ?: '', '.')) {
             $this->output .= '_*';
         } else {
-            $this->output = substr($this->output, 0, $pos).'_*'.substr($this->output, $pos);
+            $this->output = substr($this->output, 0, $pos) . '_*' . substr($this->output, $pos);
         }
     }
 
@@ -111,7 +113,7 @@ class AssetCollectionIterator implements RecursiveIterator
     private function removeDuplicateVar($name)
     {
         foreach ($this->vars as $var) {
-            $var = '{'.$var.'}';
+            $var = '{' . $var . '}';
             if (false !== strpos($name ?: '', $var) && false !== strpos($this->output ?: '', $var)) {
                 $name = str_replace($var, '', $name);
             }

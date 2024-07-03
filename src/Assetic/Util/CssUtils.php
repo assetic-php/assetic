@@ -1,4 +1,6 @@
-<?php namespace Assetic\Util;
+<?php
+
+namespace Assetic\Util;
 
 /**
  * CSS Utils.
@@ -7,11 +9,11 @@
  */
 abstract class CssUtils
 {
-    const REGEX_URLS            = '/url\((["\']?)(?P<url>.*?)(\\1)\)/';
-    const REGEX_IMPORTS         = '/@import (?:url\()?(\'|"|)(?P<url>[^\'"\)\n\r]*)\1\)?;?/';
-    const REGEX_IMPORTS_NO_URLS = '/@import (?!url\()(\'|"|)(?P<url>[^\'"\)\n\r]*)\1;?/';
-    const REGEX_IE_FILTERS      = '/src=(["\']?)(?P<url>.*?)\\1/';
-    const REGEX_COMMENTS        = '/(\/\*[^*]*\*+(?:[^\/][^*]*\*+)*\/)/';
+    public const REGEX_URLS            = '/url\((["\']?)(?P<url>.*?)(\\1)\)/';
+    public const REGEX_IMPORTS         = '/@import (?:url\()?(\'|"|)(?P<url>[^\'"\)\n\r]*)\1\)?;?/';
+    public const REGEX_IMPORTS_NO_URLS = '/@import (?!url\()(\'|"|)(?P<url>[^\'"\)\n\r]*)\1;?/';
+    public const REGEX_IE_FILTERS      = '/src=(["\']?)(?P<url>.*?)\\1/';
+    public const REGEX_COMMENTS        = '/(\/\*[^*]*\*+(?:[^\/][^*]*\*+)*\/)/';
 
     /**
      * Filters all references -- url() and "@import" -- through a callable.

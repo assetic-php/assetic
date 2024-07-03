@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Cache;
+<?php
+
+namespace Assetic\Test\Cache;
 
 use Assetic\Test\TestCase;
 use Assetic\Cache\ConfigCache;
@@ -10,7 +12,7 @@ class ConfigCacheTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->dir = sys_get_temp_dir().DIRECTORY_SEPARATOR.uniqid('assetic_config_cache');
+        $this->dir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid('assetic_config_cache');
         mkdir($this->dir);
 
         $this->cache = new ConfigCache($this->dir);

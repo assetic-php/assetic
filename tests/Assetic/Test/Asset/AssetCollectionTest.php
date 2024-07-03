@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Asset;
+<?php
+
+namespace Assetic\Test\Asset;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Asset\AssetInterface;
@@ -163,7 +165,7 @@ class AssetCollectionTest extends TestCase
     public function testGetLastModifiedWithValues()
     {
         $vars = array('locale');
-        $asset = new FileAsset(__DIR__.'/../Fixture/messages.{locale}.js', [], null, null, $vars);
+        $asset = new FileAsset(__DIR__ . '/../Fixture/messages.{locale}.js', [], null, null, $vars);
 
         $coll = new AssetCollection(array($asset), [], null, $vars);
         $coll->setValues(array('locale' => 'en'));

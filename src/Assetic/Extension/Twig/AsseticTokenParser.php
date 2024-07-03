@@ -1,4 +1,6 @@
-<?php namespace Assetic\Extension\Twig;
+<?php
+
+namespace Assetic\Extension\Twig;
 
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\Factory\AssetFactory;
@@ -144,7 +146,7 @@ class AsseticTokenParser extends AbstractTokenParser
 
     public function testEndTag(Token $token)
     {
-        return $token->test(array('end'.$this->getTag()));
+        return $token->test(array('end' . $this->getTag()));
     }
 
     /**

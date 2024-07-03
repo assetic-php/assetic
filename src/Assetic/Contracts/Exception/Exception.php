@@ -1,4 +1,6 @@
-<?php namespace Assetic\Contracts\Exception;
+<?php
+
+namespace Assetic\Contracts\Exception;
 
 /**
  * Marker.

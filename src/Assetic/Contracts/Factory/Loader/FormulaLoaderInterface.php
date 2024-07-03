@@ -1,4 +1,6 @@
-<?php namespace Assetic\Contracts\Factory\Loader;
+<?php
+
+namespace Assetic\Contracts\Factory\Loader;
 
 use Assetic\Contracts\Factory\Resource\ResourceInterface;
 

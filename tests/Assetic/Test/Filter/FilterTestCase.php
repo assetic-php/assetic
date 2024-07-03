@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use Assetic\Test\TestCase;
 use Symfony\Component\Process\ExecutableFinder;
@@ -38,7 +40,7 @@ abstract class FilterTestCase extends TestCase
             $this->markTestSkipped('Unable to find `node` executable.');
         }
 
-        $pb = new Process(array($bin, '-e', 'require(\''.$module.'\')'));
+        $pb = new Process(array($bin, '-e', 'require(\'' . $module . '\')'));
 
         if (isset($_SERVER['NODE_PATH'])) {
             $pb->setEnv(['NODE_PATH' => $_SERVER['NODE_PATH']]);
@@ -51,7 +53,7 @@ abstract class FilterTestCase extends TestCase
     {
         foreach ($paths as $path) {
             if (!preg_match(sprintf('~(^|%s)%s(%1$s|$)~', PATH_SEPARATOR, preg_quote($path, '~')), $current)) {
-                $current .= PATH_SEPARATOR.$path;
+                $current .= PATH_SEPARATOR . $path;
             }
         }
 

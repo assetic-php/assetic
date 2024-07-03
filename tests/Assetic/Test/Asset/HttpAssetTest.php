@@ -1,11 +1,13 @@
-<?php namespace Assetic\Test\Asset;
+<?php
+
+namespace Assetic\Test\Asset;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Asset\HttpAsset;
 
 class HttpAssetTest extends TestCase
 {
-    const JQUERY = 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js';
+    protected const JQUERY = 'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js';
 
     /**
      * @group http

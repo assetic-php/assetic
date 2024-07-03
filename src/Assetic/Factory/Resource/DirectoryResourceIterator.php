@@ -1,4 +1,6 @@
-<?php namespace Assetic\Factory\Resource;
+<?php
+
+namespace Assetic\Factory\Resource;
 
 /**
  * An iterator that converts file objects into file resources.

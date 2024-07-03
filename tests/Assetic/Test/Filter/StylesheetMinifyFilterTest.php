@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Asset\MockAsset;

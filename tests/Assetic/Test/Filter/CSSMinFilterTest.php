@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Asset\FileAsset;
@@ -20,7 +22,7 @@ class CSSMinFilterTest extends TestCase
 
     public function testRelativeSourceUrlImportImports()
     {
-        $asset = new FileAsset(__DIR__.'/fixtures/cssmin/main.css', [new \Assetic\Filter\CssImportFilter()]);
+        $asset = new FileAsset(__DIR__ . '/fixtures/cssmin/main.css', [new \Assetic\Filter\CssImportFilter()]);
         $asset->load();
 
         $filter = new CSSMinFilter();

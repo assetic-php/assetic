@@ -1,4 +1,6 @@
-<?php namespace Assetic\Contracts;
+<?php
+
+namespace Assetic\Contracts;
 
 /**
  * Value Supplier Interface.

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Extension\Twig;
+<?php
+
+namespace Assetic\Test\Extension\Twig;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Extension\Twig\TwigResource;

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Asset\FileAsset;
@@ -19,7 +21,7 @@ class JavaScriptMinifierFilterTest extends TestCase
 
     public function testRelativeSourceUrlImportImports()
     {
-        $asset = new FileAsset(__DIR__.'/fixtures/javascript/js.js');
+        $asset = new FileAsset(__DIR__ . '/fixtures/javascript/js.js');
         $asset->load();
 
         $filter = new JavaScriptMinifierFilter();

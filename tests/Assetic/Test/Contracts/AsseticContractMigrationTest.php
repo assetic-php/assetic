@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Contracts;
+<?php
+
+namespace Assetic\Test\Contracts;
 
 use PHPUnit\Framework\TestCase;
 

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Filter;
+<?php
+
+namespace Assetic\Filter;
 
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\Asset\FileAsset;
@@ -42,11 +44,11 @@ class CssImportFilter extends BaseCssFilter implements DependencyExtractorInterf
                 // absolute
                 list($importScheme, $tmp) = explode('://', $matches['url'], 2);
                 list($importHost, $importPath) = explode('/', $tmp, 2);
-                $importRoot = $importScheme.'://'.$importHost;
+                $importRoot = $importScheme . '://' . $importHost;
             } elseif (0 === strpos($matches['url'] ?: '', '//')) {
                 // protocol-relative
                 list($importHost, $importPath) = explode('/', substr($matches['url'], 2), 2);
-                $importRoot = '//'.$importHost;
+                $importRoot = '//' . $importHost;
             } elseif ('/' == $matches['url'][0]) {
                 // root-relative
                 $importPath = substr($matches['url'], 1);
@@ -54,13 +56,13 @@ class CssImportFilter extends BaseCssFilter implements DependencyExtractorInterf
                 // document-relative
                 $importPath = $matches['url'];
                 if ('.' != $sourceDir = dirname($sourcePath)) {
-                    $importPath = $sourceDir.'/'.$importPath;
+                    $importPath = $sourceDir . '/' . $importPath;
                 }
             } else {
                 return $matches[0];
             }
 
-            $importSource = $importRoot.'/'.$importPath;
+            $importSource = $importRoot . '/' . $importPath;
             if (false !== strpos($importSource ?: '', '://') || 0 === strpos($importSource ?: '', '//')) {
                 $import = new HttpAsset($importSource, array($importFilter), true);
             } elseif ('css' != pathinfo($importPath ?: '', PATHINFO_EXTENSION) || !file_exists($importSource)) {

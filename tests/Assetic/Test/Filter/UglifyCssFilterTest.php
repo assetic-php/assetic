@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use Assetic\Asset\FileAsset;
 use Assetic\Filter\UglifyCssFilter;
@@ -19,7 +21,7 @@ class UglifyCssFilterTest extends FilterTestCase
             $this->markTestSkipped('Unable to find `uglifycss` executable.');
         }
 
-        $this->asset = new FileAsset(__DIR__.'/fixtures/uglifycss/main.css');
+        $this->asset = new FileAsset(__DIR__ . '/fixtures/uglifycss/main.css');
         $this->asset->load();
 
         $this->filter = new UglifyCssFilter($uglifycssBin, $nodeBin);

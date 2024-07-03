@@ -1,4 +1,6 @@
-<?php namespace Assetic\Factory;
+<?php
+
+namespace Assetic\Factory;
 
 use Assetic\Asset\AssetCollection;
 use Assetic\Contracts\Asset\AssetCollectionInterface;
@@ -202,21 +204,21 @@ class AssetFactory
         if (!empty($options['vars'])) {
             $toAdd = [];
             foreach ($options['vars'] as $var) {
-                if (false !== strpos($options['output'] ?: '', '{'.$var.'}')) {
+                if (false !== strpos($options['output'] ?: '', '{' . $var . '}')) {
                     continue;
                 }
 
-                $toAdd[] = '{'.$var.'}';
+                $toAdd[] = '{' . $var . '}';
             }
 
             if ($toAdd) {
-                $options['output'] = str_replace('*', '*.'.implode('.', $toAdd), $options['output']);
+                $options['output'] = str_replace('*', '*.' . implode('.', $toAdd), $options['output']);
             }
         }
 
         // append consensus extension if missing
         if (1 == count($extensions) && !pathinfo($options['output'] ?: '', PATHINFO_EXTENSION) && $extension = key($extensions)) {
-            $options['output'] .= '.'.$extension;
+            $options['output'] .= '.' . $extension;
         }
 
         // output --> target url
@@ -234,7 +236,7 @@ class AssetFactory
 
         ksort($options);
 
-        return substr(sha1(serialize($inputs).serialize($filters).serialize($options)), 0, 7);
+        return substr(sha1(serialize($inputs) . serialize($filters) . serialize($options)), 0, 7);
     }
 
     public function getLastModified(AssetInterface $asset)
@@ -308,7 +310,7 @@ class AssetFactory
         } else {
             $root  = $this->root;
             $path  = $input;
-            $input = $this->root.'/'.$path;
+            $input = $this->root . '/' . $path;
         }
 
         if (false !== strpos($input ?: '', '*')) {

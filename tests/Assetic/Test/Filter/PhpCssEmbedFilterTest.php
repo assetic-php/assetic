@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Asset\FileAsset;
@@ -18,14 +20,14 @@ class PhpCssEmbedFilterTest extends TestCase
 
     public function testCssEmbedDataUri()
     {
-        $data = base64_encode(file_get_contents(__DIR__.'/fixtures/home.png'));
+        $data = base64_encode(file_get_contents(__DIR__ . '/fixtures/home.png'));
 
-        $asset = new FileAsset(__DIR__.'/fixtures/cssembed/test.css');
+        $asset = new FileAsset(__DIR__ . '/fixtures/cssembed/test.css');
         $asset->load();
 
         $filter = new PhpCssEmbedFilter();
         $filter->filterLoad($asset);
 
-        $this->assertStringContainsString('url(data:image/png;base64,'.$data, $asset->getContent());
+        $this->assertStringContainsString('url(data:image/png;base64,' . $data, $asset->getContent());
     }
 }

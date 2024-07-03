@@ -1,4 +1,6 @@
-<?php namespace Assetic\Factory\Worker;
+<?php
+
+namespace Assetic\Factory\Worker;
 
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\Factory\AssetFactory;
@@ -13,8 +15,8 @@ use Assetic\Contracts\Factory\Worker\WorkerInterface;
  */
 class EnsureFilterWorker implements WorkerInterface
 {
-    const CHECK_SOURCE = 1;
-    const CHECK_TARGET = 2;
+    public const CHECK_SOURCE = 1;
+    public const CHECK_TARGET = 2;
 
     private $pattern;
     private $filter;

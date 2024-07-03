@@ -1,4 +1,6 @@
-<?php namespace Assetic\Util;
+<?php
+
+namespace Assetic\Util;
 
 /**
  * Variable utilities.
@@ -22,7 +24,7 @@ abstract class VarUtils
     {
         $map = [];
         foreach ($vars as $var) {
-            if (false === strpos($template ?: '', '{'.$var.'}')) {
+            if (false === strpos($template ?: '', '{' . $var . '}')) {
                 continue;
             }
 
@@ -30,7 +32,7 @@ abstract class VarUtils
                 throw new \InvalidArgumentException(sprintf('The template "%s" contains the variable "%s", but was not given any value for it.', $template, $var));
             }
 
-            $map['{'.$var.'}'] = $values[$var];
+            $map['{' . $var . '}'] = $values[$var];
         }
 
         return strtr($template, $map);

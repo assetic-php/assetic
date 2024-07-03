@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Asset;
+<?php
+
+namespace Assetic\Test\Asset;
 
 use PHPUnit\Framework\TestCase;
 use Assetic\Contracts\Asset\AssetInterface;
@@ -29,7 +31,7 @@ class FileAssetTest extends TestCase
 
     public function testGetLastModifiedTypeFileNotFound()
     {
-        $asset = new FileAsset(__DIR__."/foo/bar/baz.css");
+        $asset = new FileAsset(__DIR__ . "/foo/bar/baz.css");
 
         $this->expectException("RuntimeException");
         $asset->getLastModified();
@@ -60,6 +62,6 @@ class FileAssetTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        new FileAsset(__FILE__, [], __DIR__.'/foo');
+        new FileAsset(__FILE__, [], __DIR__ . '/foo');
     }
 }

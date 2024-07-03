@@ -1,4 +1,6 @@
-<?php namespace Assetic\Extension\Twig;
+<?php
+
+namespace Assetic\Extension\Twig;
 
 use Twig\Compiler;
 use Twig\Node\Expression\FunctionExpression;

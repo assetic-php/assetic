@@ -1,4 +1,6 @@
-<?php namespace Assetic\Asset\Iterator;
+<?php
+
+namespace Assetic\Asset\Iterator;
 
 use RecursiveFilterIterator;
 
@@ -54,7 +56,7 @@ class AssetCollectionFilterIterator extends RecursiveFilterIterator
         $sourceRoot = $asset->getSourceRoot();
         $sourcePath = $asset->getSourcePath();
         if ($sourceRoot && $sourcePath) {
-            $source = $sourceRoot.'/'.$sourcePath;
+            $source = $sourceRoot . '/' . $sourcePath;
             if (in_array($source, $this->sources)) {
                 $duplicate = true;
             } else {

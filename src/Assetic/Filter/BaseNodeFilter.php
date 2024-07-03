@@ -1,4 +1,6 @@
-<?php namespace Assetic\Filter;
+<?php
+
+namespace Assetic\Filter;
 
 abstract class BaseNodeFilter extends BaseProcessFilter
 {

@@ -1,4 +1,6 @@
-<?php namespace Assetic\Test\Filter;
+<?php
+
+namespace Assetic\Test\Filter;
 
 use Assetic\Asset\FileAsset;
 use Assetic\Filter\UglifyJs2Filter;
@@ -36,7 +38,7 @@ class UglifyJs2FilterTest extends FilterTestCase
             $this->markTestSkipped('Incorrect version of UglifyJs');
         }
 
-        $this->asset = new FileAsset(__DIR__.'/fixtures/uglifyjs/script.js');
+        $this->asset = new FileAsset(__DIR__ . '/fixtures/uglifyjs/script.js');
         $this->asset->load();
 
         $this->filter = new UglifyJs2Filter($uglifyjsBin, $nodeBin);

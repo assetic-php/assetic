@@ -79,7 +79,7 @@ class LessphpFilterTest extends FilterTestCase
         $asset = new StringAsset('.foo { color: @bar }');
         $asset->load();
 
-        $this->filter->setPresets(array('bar' => 'green'));
+        $this->filter->setPresets(array('bar' => '#008000'));
         $this->filter->filterLoad($asset);
 
         $this->assertStringContainsString('#008000', $asset->getContent(), '->setPresets() to pass variables into lessphp filter');

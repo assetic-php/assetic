@@ -2,7 +2,7 @@
 
 namespace Assetic\Filter;
 
-use Assetic\Asset\AssetInterface;
+use Assetic\Contracts\Asset\AssetInterface;
 
 /**
  * Stylesheet Minify Filter
@@ -52,8 +52,11 @@ class StylesheetMinifyFilter extends BaseFilter
         // Strips units if value is 0 (converts 0px to 0), ignores values inside ()
         $css = preg_replace('/(:| )(\.?)0(em|ex|px|in|cm|mm|pt|pc)(?![^\(]*\))/i', '${1}0', $css);
 
+        // Shorten 8-character hex color codes to 4-character where possible
+        $css = preg_replace('/#([a-f0-9])\\1([a-f0-9])\\2([a-f0-9])\\3([a-f0-9])\\4/i', '#\1\2\3\4', $css);
+
         // Shortern 6-character hex color codes to 3-character where possible
-        $css = preg_replace('/#([a-f0-9])\\1([a-f0-9])\\2([a-f0-9])\\3/i', '#\1\2\3', $css);
+        $css = preg_replace('/#([a-f0-9])\\1([a-f0-9])\\2([a-f0-9])\\3(?![a-f0-9])/i', '#\1\2\3', $css);
 
         return trim($css);
     }

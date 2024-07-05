@@ -131,4 +131,15 @@ EOS;
 
         $this->assertEquals($output, $mockAsset->getContent());
     }
+
+    public function testHexMinification()
+    {
+        $asset = new \Assetic\Asset\StringAsset('body { color: #00000088; background: #ffffff; border: #012345; box-shadow: 0 0 0 1px #01234567; }');
+        $asset->load();
+
+        $filter = new StylesheetMinifyFilter();
+        $filter->filterDump($asset);
+
+        $this->assertEquals('body{color:#0008;background:#fff;border:#012345;box-shadow:0 0 0 1px #01234567}', $asset->getContent());
+    }
 }

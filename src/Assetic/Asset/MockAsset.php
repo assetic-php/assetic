@@ -2,8 +2,8 @@
 
 namespace Assetic\Asset;
 
-use Assetic\Asset\AssetInterface;
-use Assetic\Filter\FilterInterface;
+use Assetic\Contracts\Asset\AssetInterface;
+use Assetic\Contracts\Filter\FilterInterface;
 
 /**
  * Class MockAsset

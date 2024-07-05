@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.1.1 (2024-07-05)
+
+### Changes
+
+- Conform codebase to PSR-12 code style guidelines
+- Update wikimedia/less.php from 3.0 to 5.x for tests by @Krinkle in https://github.com/assetic-php/assetic/pull/38
+
+### Bug fixes
+
+- 8 character color hex codes (with alpha channel) are no longer minified to 3 character hex codes in `StylesheetFilter`, these are instead minified to 4 characters.
+- The `MockAsset` asset has been switched to using contracts for typehints and return types.
+
+### Community updates
+
+- Combine and consistently format the changelog by @bennothommo in https://github.com/assetic-php/assetic/pull/39
+
 ## 3.1.0 (2024-04-04)
 
 ### New features

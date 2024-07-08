@@ -17,6 +17,11 @@ abstract class BaseProcessFilter extends BaseFilter
     protected $binaryPath;
 
     /**
+     * Defines the working directory for the process.
+     */
+    protected ?string $workingDirectory = null;
+
+    /**
      * @var boolean Flag to indicate that the process will output the result to the input file
      */
     protected $useInputAsOutput = false;
@@ -76,6 +81,25 @@ abstract class BaseProcessFilter extends BaseFilter
     }
 
     /**
+     * Sets the binary path for the process.
+     */
+    public function setBinaryPath(string $binaryPath): void
+    {
+        $this->binaryPath = $binaryPath;
+    }
+
+    /**
+     * Sets the working directory for the process.
+     *
+     * Some processes may require a specified working directory to function correctly, ie. locating configurations,
+     * assets, etc.
+     */
+    public function setWorkingDirectory(?string $workingDirectory = null): void
+    {
+        $this->workingDirectory = $workingDirectory;
+    }
+
+    /**
      * Creates a new process.
      *
      * @param array $arguments An optional array of arguments
@@ -83,7 +107,7 @@ abstract class BaseProcessFilter extends BaseFilter
      */
     protected function createProcess(array $arguments = [])
     {
-        $process = new Process($arguments);
+        $process = new Process($arguments, $this->workingDirectory);
 
         if (null !== $this->timeout) {
             $process->setTimeout($this->timeout);

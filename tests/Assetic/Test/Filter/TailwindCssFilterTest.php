@@ -10,7 +10,8 @@ use Assetic\Filter\TailwindCssFilter;
  */
 class TailwindCssFilterTest extends FilterTestCase
 {
-    private ?TailwindCssFilter $filter;
+    /** @var TailwindCssFilter|null */
+    private $filter;
 
     protected function setUp(): void
     {

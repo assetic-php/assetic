@@ -95,6 +95,7 @@ The core provides the following filters in the `Assetic\Filter` namespace:
  * `SeparatorFilter`: inserts a separator between assets to prevent merge failures
  * `StylesheetMinifyFilter`: compresses stylesheet CSS files
  * `StylusFilter`: parses STYL into CSS
+ * `TailwindCssFilter`: builds a Tailwind CSS stylesheet using the Tailwind CSS standalone CLI utility
  * `TypeScriptFilter`: parses TypeScript into Javascript
  * `UglifyCssFilter`: minifies CSS
  * `UglifyJs2Filter`: minifies Javascript

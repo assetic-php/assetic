@@ -19,19 +19,19 @@ class TailwindCssFilter extends BaseProcessFilter
     protected $binaryPath = '/usr/bin/tailwindcss';
 
     /**
-     * Path to the Tailwind configuration file.
+     * @var string|null Path to the Tailwind configuration file.
      */
-    protected ?string $configPath = null;
+    protected $configPath = null;
 
     /**
-     * Is minification enabled?
+     * @var bool Is minification enabled?
      */
-    protected bool $minify = false;
+    protected $minify = false;
 
     /**
-     * Is autoprefixing enabled?
+     * @var bool Is autoprefixing enabled?
      */
-    protected bool $autoprefix = true;
+    protected $autoprefix = true;
 
     /**
      * Sets the path for the configuration file.

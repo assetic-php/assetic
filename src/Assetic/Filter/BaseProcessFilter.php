@@ -17,9 +17,9 @@ abstract class BaseProcessFilter extends BaseFilter
     protected $binaryPath;
 
     /**
-     * Defines the working directory for the process.
+     * @var string|null Defines the working directory for the process.
      */
-    protected ?string $workingDirectory = null;
+    protected $workingDirectory = null;
 
     /**
      * @var boolean Flag to indicate that the process will output the result to the input file

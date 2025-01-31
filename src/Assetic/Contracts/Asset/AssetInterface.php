@@ -35,9 +35,9 @@ interface AssetInterface
      *
      * You may provide an additional filter to apply during load.
      *
-     * @param FilterInterface $additionalFilter An additional filter
+     * @param ?FilterInterface $additionalFilter An additional filter
      */
-    public function load(FilterInterface $additionalFilter = null);
+    public function load(?FilterInterface $additionalFilter = null);
 
     /**
      * Applies dump filters and returns the asset as a string.
@@ -49,11 +49,11 @@ interface AssetInterface
      * If the current asset has not been loaded yet, it should be
      * automatically loaded at this time.
      *
-     * @param FilterInterface $additionalFilter An additional filter
+     * @param ?FilterInterface $additionalFilter An additional filter
      *
      * @return string The filtered content of the current asset
      */
-    public function dump(FilterInterface $additionalFilter = null);
+    public function dump(?FilterInterface $additionalFilter = null);
 
     /**
      * Returns the loaded content of the current asset.

@@ -125,7 +125,7 @@ class AssetCollection implements \IteratorAggregate, AssetCollectionInterface
         $this->clones = new \SplObjectStorage();
     }
 
-    public function load(FilterInterface $additionalFilter = null)
+    public function load(?FilterInterface $additionalFilter = null)
     {
         // loop through leaves and load each asset
         $parts = [];
@@ -137,7 +137,7 @@ class AssetCollection implements \IteratorAggregate, AssetCollectionInterface
         $this->content = implode("\n", $parts);
     }
 
-    public function dump(FilterInterface $additionalFilter = null)
+    public function dump(?FilterInterface $additionalFilter = null)
     {
         // loop through leaves and dump each asset
         $parts = [];

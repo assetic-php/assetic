@@ -42,7 +42,7 @@ class HttpAsset extends BaseAsset
         parent::__construct($filters, $scheme . '://' . $host, $path, $vars);
     }
 
-    public function load(FilterInterface $additionalFilter = null)
+    public function load(?FilterInterface $additionalFilter = null)
     {
         $content = @file_get_contents(
             VarUtils::resolve($this->sourceUrl, $this->getVars(), $this->getValues())

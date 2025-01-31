@@ -41,7 +41,7 @@ class GlobAsset extends AssetCollection
         return parent::all();
     }
 
-    public function load(FilterInterface $additionalFilter = null)
+    public function load(?FilterInterface $additionalFilter = null)
     {
         if (!$this->initialized) {
             $this->initialize();
@@ -50,7 +50,7 @@ class GlobAsset extends AssetCollection
         parent::load($additionalFilter);
     }
 
-    public function dump(FilterInterface $additionalFilter = null)
+    public function dump(?FilterInterface $additionalFilter = null)
     {
         if (!$this->initialized) {
             $this->initialize();

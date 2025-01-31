@@ -29,7 +29,7 @@ class StringAsset extends BaseAsset
         parent::__construct($filters, $sourceRoot, $sourcePath);
     }
 
-    public function load(FilterInterface $additionalFilter = null)
+    public function load(?FilterInterface $additionalFilter = null)
     {
         $this->doLoad($this->string, $additionalFilter);
     }

@@ -25,8 +25,8 @@ class UglifyJs3Filter extends BaseNodeFilter
     private $defines;
 
     /**
-     * @param string $uglifyjsBin Absolute path to the uglifyjs executable
-     * @param string $nodeBin     Absolute path to the folder containg node.js executable
+     * @param string  $uglifyjsBin Absolute path to the uglifyjs executable
+     * @param ?string $nodeBin     Absolute path to the folder containing node.js executable
      */
     public function __construct($uglifyjsBin = '/usr/bin/uglifyjs', $nodeBin = null)
     {

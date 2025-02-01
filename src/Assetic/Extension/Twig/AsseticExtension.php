@@ -13,7 +13,7 @@ class AsseticExtension extends AbstractExtension implements GlobalsInterface
     protected $functions;
     protected $valueSupplier;
 
-    public function __construct(AssetFactory $factory, $functions = [], ValueSupplierInterface $valueSupplier = null)
+    public function __construct(AssetFactory $factory, $functions = [], ?ValueSupplierInterface $valueSupplier = null)
     {
         $this->factory = $factory;
         $this->functions = [];

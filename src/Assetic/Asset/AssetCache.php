@@ -38,7 +38,7 @@ class AssetCache implements AssetInterface
         $this->asset->clearFilters();
     }
 
-    public function load(FilterInterface $additionalFilter = null)
+    public function load(?FilterInterface $additionalFilter = null)
     {
         $cacheKey = self::getCacheKey($this->asset, $additionalFilter, 'load');
         if ($this->cache->has($cacheKey)) {
@@ -51,7 +51,7 @@ class AssetCache implements AssetInterface
         $this->cache->set($cacheKey, $this->asset->getContent());
     }
 
-    public function dump(FilterInterface $additionalFilter = null)
+    public function dump(?FilterInterface $additionalFilter = null)
     {
         $cacheKey = self::getCacheKey($this->asset, $additionalFilter, 'dump');
         if ($this->cache->has($cacheKey)) {
@@ -130,13 +130,13 @@ class AssetCache implements AssetInterface
      *  * last modified
      *  * filters
      *
-     * @param AssetInterface  $asset            The asset
-     * @param FilterInterface $additionalFilter Any additional filter being applied
-     * @param string          $salt             Salt for the key
+     * @param AssetInterface   $asset            The asset
+     * @param ?FilterInterface $additionalFilter Any additional filter being applied
+     * @param string           $salt             Salt for the key
      *
      * @return string A key for identifying the current asset
      */
-    private static function getCacheKey(AssetInterface $asset, FilterInterface $additionalFilter = null, $salt = '')
+    private static function getCacheKey(AssetInterface $asset, ?FilterInterface $additionalFilter = null, $salt = '')
     {
         if ($additionalFilter) {
             $asset = clone $asset;

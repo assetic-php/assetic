@@ -37,6 +37,8 @@ class TypeScriptFilter extends BaseNodeFilter
     {
         $args = [
             '{INPUT}',
+            '--ignoreDeprecations',
+            '6.0',
             '--outFile',
             '{OUTPUT}'
         ];

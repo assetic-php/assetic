@@ -50,6 +50,9 @@
         "ptachoire/cssembed": "The Assetic\\Filter\\PhpCssEmbedFilter requires ptachoire/cssembed",
         "twig/twig": "Assetic provides an integration with the Twig templating engine"
     },
+    "scripts": {
+        "test": "./bin/phpunit"
+    },
     "replace": {
         "kriswallsmith/assetic": "1.4.0"
     },

@@ -23,10 +23,10 @@ abstract class FilterTestCase extends TestCase
         // update the path (emulates logic in ExecutableFinder)
         $paths = array(__DIR__ . '/../../../../node_modules/.bin');
         if ($current = ini_get('open_basedir')) {
-            ini_set('open_basedir', $this->ensurePaths($current, $paths));
+            ini_set('open_basedir', $this->prependPaths($current, $paths));
         } else {
             $varname = getenv('PATH') ? 'PATH' : 'Path';
-            putenv(sprintf('%s=%s', $varname, $this->ensurePaths(getenv($varname), $paths)));
+            putenv(sprintf('%s=%s', $varname, $this->prependPaths(getenv($varname), $paths)));
         }
 
         $finder = new ExecutableFinder();
@@ -49,12 +49,13 @@ abstract class FilterTestCase extends TestCase
         return 0 === $pb->run();
     }
 
-    private function ensurePaths($current, array $paths)
+    private function prependPaths($current, array $paths)
     {
         foreach ($paths as $path) {
-            if (!preg_match(sprintf('~(^|%s)%s(%1$s|$)~', PATH_SEPARATOR, preg_quote($path, '~')), $current)) {
-                $current .= PATH_SEPARATOR . $path;
-            }
+            $pattern = sprintf('~(^|%s)%s(%1$s|$)~', PATH_SEPARATOR, preg_quote($path, '~'));
+            $current = preg_replace($pattern, '$1$2', $current);
+            $current = trim($current, PATH_SEPARATOR);
+            $current = $path . ($current === '' ? '' : PATH_SEPARATOR . $current);
         }
 
         return $current;

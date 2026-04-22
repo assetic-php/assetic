@@ -63,6 +63,9 @@
         ]
     },
     "config": {
+        "audit": {
+            "block-insecure": false
+        },
         "bin-dir": "bin"
     }
 }

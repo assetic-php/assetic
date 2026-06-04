@@ -58,11 +58,13 @@ class HttpAsset extends BaseAsset
     public function getLastModified()
     {
         if (false !== @file_get_contents($this->sourceUrl, false, stream_context_create(array('http' => array('method' => 'HEAD'))))) {
-            // TODO: $http_response_header deprecated since PHP 8.5
-            //       Remove when min PHP >= 8.4 and use http_get_last_response_headers() directly
+            // http_get_last_response_headers() was added in PHP 8.4; older versions fall back
+            // to the predefined $http_response_header. The `?? []` coalescing read avoids the
+            // PHP 8.5 deprecation of that variable: a bare read is flagged at compile time,
+            // a coalescing read is not. Drop the fallback once the minimum PHP version is >= 8.4.
             $headers = function_exists('http_get_last_response_headers')
                 ? http_get_last_response_headers()
-                : $http_response_header;
+                : ($http_response_header ?? []);
             foreach ($headers as $header) {
                 if (0 === stripos($header, 'Last-Modified: ')) {
                     list(, $mtime) = explode(':', $header, 2);

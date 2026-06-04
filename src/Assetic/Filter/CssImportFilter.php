@@ -7,6 +7,7 @@ use Assetic\Asset\FileAsset;
 use Assetic\Asset\HttpAsset;
 use Assetic\Factory\AssetFactory;
 use Assetic\Contracts\Filter\DependencyExtractorInterface;
+use Assetic\Contracts\Filter\FilterInterface;
 
 /**
  * Inlines imported stylesheets.

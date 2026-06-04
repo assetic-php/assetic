@@ -105,7 +105,8 @@ abstract class BasePhpFormulaLoader implements FormulaLoaderInterface
             $call,
             'echo serialize($_call);',
         )));
-        $args = unserialize(shell_exec('php ' . escapeshellarg($tmp)));
+        $output = shell_exec('php ' . escapeshellarg($tmp));
+        $args = is_string($output) ? unserialize($output) : array();
         unlink($tmp);
 
         $inputs  = isset($args[0]) ? self::argumentToArray($args[0]) : [];

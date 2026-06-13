@@ -254,6 +254,6 @@ class AsseticExtensionTest extends TestCase
 
     private function renderXml($name, $context = [])
     {
-        return new \SimpleXMLElement($this->twig->loadTemplate($name)->render($context));
+        return new \SimpleXMLElement($this->twig->load($name)->render($context));
     }
 }

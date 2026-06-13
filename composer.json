@@ -39,7 +39,7 @@
         "psr/log": "^1.0",
         "ptachoire/cssembed": "^1.0",
         "symfony/phpunit-bridge": "^3.4 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
-        "twig/twig": "^2.11",
+        "twig/twig": "^2.11 || ^3.0",
         "phpspec/prophecy-phpunit": "^2.0"
     },
     "suggest": {

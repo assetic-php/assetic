@@ -3,9 +3,12 @@
 namespace Assetic\Extension\Twig;
 
 use Assetic\Contracts\Asset\AssetInterface;
+use Twig\Attribute\YieldReady;
 use Twig\Compiler;
+use Twig\Environment;
 use Twig\Node\Node;
 
+#[YieldReady]
 class AsseticNode extends Node
 {
     /**
@@ -36,7 +39,14 @@ class AsseticNode extends Node
             array('asset' => $asset, 'inputs' => $inputs, 'filters' => $filters, 'name' => $name)
         );
 
-        parent::__construct($nodes, $attributes, $lineno, $tag);
+        // Twig 3.12 deprecated passing the node tag to the constructor; the
+        // Parser now sets it automatically. Twig 2.x and Twig < 3.12 still
+        // expect it to be supplied here.
+        if (version_compare(Environment::VERSION, '3.12.0', '>=')) {
+            parent::__construct($nodes, $attributes, $lineno);
+        } else {
+            parent::__construct($nodes, $attributes, $lineno, $tag);
+        }
     }
 
     public function compile(Compiler $compiler)

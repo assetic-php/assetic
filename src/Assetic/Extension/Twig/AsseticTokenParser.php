@@ -88,7 +88,13 @@ class AsseticTokenParser extends AbstractTokenParser
                 // vars=['locale','browser']
                 $stream->next();
                 $stream->expect(Token::OPERATOR_TYPE, '=');
-                $stream->expect(Token::PUNCTUATION_TYPE, '[');
+
+                // Twig 2 lexes the opening "[" as punctuation, Twig 3 as an operator.
+                if ($stream->test(Token::OPERATOR_TYPE, '[')) {
+                    $stream->next();
+                } else {
+                    $stream->expect(Token::PUNCTUATION_TYPE, '[');
+                }
 
                 while ($stream->test(Token::STRING_TYPE)) {
                     $attributes['vars'][] = $stream->expect(Token::STRING_TYPE)->getValue();

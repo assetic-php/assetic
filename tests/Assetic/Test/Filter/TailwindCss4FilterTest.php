@@ -8,7 +8,7 @@ use Assetic\Filter\TailwindCssFilter;
 /**
  * @group integration
  */
-class TailwindCssFilterTest extends FilterTestCase
+class TailwindCss4FilterTest extends FilterTestCase
 {
     /** @var TailwindCssFilter|null */
     private $filter;
@@ -31,58 +31,57 @@ class TailwindCssFilterTest extends FilterTestCase
 
     public function testFilterLoad()
     {
-        $fileAsset = new FileAsset(__DIR__ . '/fixtures/tailwindcss/css/style.css');
+        $fileAsset = new FileAsset(__DIR__ . '/fixtures/tailwindcss4/css/style.css');
         $fileAsset->load();
 
-        $this->filter->setConfigPath(__DIR__ . '/fixtures/tailwindcss/tailwind.config.js');
-        $this->filter->setWorkingDirectory(__DIR__ . '/fixtures/tailwindcss');
+        $this->filter->setWorkingDirectory(__DIR__ . '/fixtures/tailwindcss4');
         $this->filter->filterLoad($fileAsset);
         $contents = $fileAsset->getContent();
 
         // Detect boilerplate TailwindCSS styling
         $expected = <<<'STYLE'
-            ::backdrop {
-              --tw-border-spacing-x: 0;
-              --tw-border-spacing-y: 0;
-              --tw-translate-x: 0;
-              --tw-translate-y: 0;
-            STYLE;
+        @layer base {
+          *, ::after, ::before, ::backdrop, ::file-selector-button {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border: 0 solid;
+          }
+        STYLE;
 
         $this->assertStringContainsString($expected, $contents);
 
         // Detect class defined in HTML
         $expected = <<<'STYLE'
-            .text-gray-800 {
-              --tw-text-opacity: 1;
-              color: rgb(31 41 55 / var(--tw-text-opacity));
-            }
-            STYLE;
+          .text-gray-800 {
+            color: var(--color-gray-800);
+          }
+        STYLE;
 
         $this->assertStringContainsString($expected, $contents);
     }
 
     public function testFilterLoadWithMinification()
     {
-        $fileAsset = new FileAsset(__DIR__ . '/fixtures/tailwindcss/css/style.css');
+        $fileAsset = new FileAsset(__DIR__ . '/fixtures/tailwindcss4/css/style.css');
         $fileAsset->load();
 
-        $this->filter->setConfigPath(__DIR__ . '/fixtures/tailwindcss/tailwind.config.js');
-        $this->filter->setWorkingDirectory(__DIR__ . '/fixtures/tailwindcss');
+        $this->filter->setWorkingDirectory(__DIR__ . '/fixtures/tailwindcss4');
         $this->filter->minify();
         $this->filter->filterLoad($fileAsset);
         $contents = $fileAsset->getContent();
 
         // Detect boilerplate TailwindCSS styling
         $expected = <<<'STYLE'
-            *,::backdrop,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;
-            STYLE;
+        @layer base{*,:after,:before,::backdrop{box-sizing:border-box;border:0 solid;margin:0;padding:0}::file-selector-button{box-sizing:border-box;border:0 solid;margin:0;padding:0}
+        STYLE;
 
         $this->assertStringContainsString($expected, $contents);
 
         // Detect class defined in HTML
         $expected = <<<'STYLE'
-            .text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55/var(--tw-text-opacity))}
-            STYLE;
+        .text-gray-800{color:var(--color-gray-800)}
+        STYLE;
 
         $this->assertStringContainsString($expected, $contents);
     }

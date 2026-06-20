@@ -1,9 +1,10 @@
 bin/
 composer.lock
 composer.phar
+package-lock.json
 phpunit.xml
 vendor/
 node_modules/
-Gemfile.lock
+.zed/
 .idea/
 .phpunit.result.cache

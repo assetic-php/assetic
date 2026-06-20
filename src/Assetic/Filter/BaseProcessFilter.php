@@ -164,7 +164,9 @@ abstract class BaseProcessFilter extends BaseFilter
         $args = $this->getPathArgs();
 
         if (empty($args)) {
-            throw new \Exception('The binary path for ' . static::class . ' has not been set. Please set it and try again.');
+            throw new \Exception(
+                'The binary path for ' . static::class . ' has not been set. Please set it and try again.',
+            );
         }
 
         // Prepare the input & output file paths
@@ -277,7 +279,7 @@ abstract class BaseProcessFilter extends BaseFilter
     {
         if ($this->debug) {
             var_dump($args);
-            die;
+            die();
         }
     }
 }

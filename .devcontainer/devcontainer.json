@@ -1,0 +1,25 @@
+{
+    "name": "PHP 8.5",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "configureZshAsDefaultShell": true,
+            "username": "assetic",
+            "upgradePackages": false
+        },
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/assetic,type=bind",
+    "workspaceFolder": "/assetic",
+    "portsAttributes": {
+        "9003": {
+            "label": "Xdebug",
+            "onAutoForward": "notify"
+        }
+    },
+    "remoteUser": "assetic"
+}

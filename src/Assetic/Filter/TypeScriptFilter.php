@@ -35,15 +35,39 @@ class TypeScriptFilter extends BaseNodeFilter
      */
     public function filterLoad(AssetInterface $asset)
     {
+        // Newer TypeScript releases removed the single-file `--outFile` option, so
+        // emit into an output directory and read the compiled file back. The input
+        // is always written as `input.ts` (see getInputPath()), so tsc produces
+        // `input.js` inside the output directory.
         $args = [
             '{INPUT}',
-            '--ignoreDeprecations',
-            '6.0',
-            '--outFile',
-            '{OUTPUT}'
+            '--outDir',
+            '{OUTPUT}',
         ];
 
         $result = $this->runProcess($asset->getContent(), $args);
         $asset->setContent($result);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * tsc emits into a directory rather than a single named file, so the output
+     * location must be a throw-away directory instead of a temporary file.
+     */
+    protected function getOutputPath()
+    {
+        $prefix = preg_replace('/[^\w]/', '', static::class);
+        return FilesystemUtils::createThrowAwayDirectory($prefix . '-output');
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * Reads the compiled `input.js` from the output directory produced by tsc.
+     */
+    protected function getOutput()
+    {
+        return file_get_contents($this->outputPath . '/input.js');
     }
 }

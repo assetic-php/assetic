@@ -50,6 +50,41 @@ CSS;
         );
     }
 
+    public function testImportValidatorCanRejectImports()
+    {
+        $asset = new FileAsset(__DIR__ . '/fixtures/cssimport/main.css', [], __DIR__ . '/fixtures/cssimport', 'main.css');
+        $asset->load();
+
+        $filter = new CssImportFilter();
+        $filter->setImportValidator(function ($path) {
+            return false;
+        });
+        $filter->filterLoad($asset);
+
+        // Rejected imports are left as raw @import statements and never inlined.
+        $this->assertStringNotContainsString('body { color: red; }', $asset->getContent());
+        $this->assertStringContainsString('@import "import.css";', $asset->getContent());
+    }
+
+    public function testImportValidatorReceivesResolvedPathAndCanAllow()
+    {
+        $asset = new FileAsset(__DIR__ . '/fixtures/cssimport/main.css', [], __DIR__ . '/fixtures/cssimport', 'main.css');
+        $asset->load();
+
+        $seen = [];
+        $filter = new CssImportFilter();
+        $filter->setImportValidator(function ($path) use (&$seen) {
+            $seen[] = $path;
+            return true;
+        });
+        $filter->filterLoad($asset);
+
+        // Allowed imports inline as normal, and the validator sees a resolved path.
+        $this->assertStringContainsString('body { color: red; }', $asset->getContent());
+        $this->assertNotEmpty($seen);
+        $this->assertStringContainsString('import.css', implode('|', $seen));
+    }
+
     public function testNonCssImport()
     {
         $asset = new FileAsset(__DIR__ . '/fixtures/cssimport/noncssimport.css', [], __DIR__ . '/fixtures/cssimport', 'noncssimport.css');

@@ -18,6 +18,9 @@ class CssImportFilter extends BaseCssFilter implements DependencyExtractorInterf
 {
     private $importFilter;
 
+    /** @var callable|null */
+    private $importValidator;
+
     /**
      * Constructor.
      *
@@ -28,13 +31,33 @@ class CssImportFilter extends BaseCssFilter implements DependencyExtractorInterf
         $this->importFilter = $importFilter ?: new CssRewriteFilter();
     }
 
+    /**
+     * Set an optional validator that authorises each local file import before it is
+     * inlined. The validator receives the resolved import path (assembled from the
+     * asset's source root and the `@import` URL) and must return true to allow the
+     * import or false to skip it, leaving the raw `@import` statement untouched.
+     *
+     * This is an opt-in confinement hook for consumers that inline imports from
+     * potentially untrusted stylesheets: without it, `@import` targets are resolved
+     * relative to the source with `..` traversal allowed, which can disclose any
+     * readable `.css` file on the server. Defaults to null (no restriction) so
+     * existing behaviour is unchanged for callers that do not set it.
+     */
+    public function setImportValidator(?callable $importValidator): self
+    {
+        $this->importValidator = $importValidator;
+
+        return $this;
+    }
+
     public function filterLoad(AssetInterface $asset)
     {
         $importFilter = $this->importFilter;
+        $importValidator = $this->importValidator;
         $sourceRoot = $asset->getSourceRoot();
         $sourcePath = $asset->getSourcePath();
 
-        $callback = function ($matches) use ($importFilter, $sourceRoot, $sourcePath) {
+        $callback = function ($matches) use ($importFilter, $importValidator, $sourceRoot, $sourcePath) {
             if (!$matches['url'] || null === $sourceRoot) {
                 return $matches[0];
             }
@@ -68,6 +91,10 @@ class CssImportFilter extends BaseCssFilter implements DependencyExtractorInterf
                 $import = new HttpAsset($importSource, array($importFilter), true);
             } elseif ('css' != pathinfo($importPath ?: '', PATHINFO_EXTENSION) || !file_exists($importSource)) {
                 // ignore non-css and non-existant imports
+                return $matches[0];
+            } elseif (null !== $importValidator && !$importValidator($importSource)) {
+                // ignore imports the caller-supplied validator rejects (e.g. a path
+                // that escapes the allowed roots via `..` traversal)
                 return $matches[0];
             } else {
                 $import = new FileAsset($importSource, array($importFilter), $importRoot, $importPath);

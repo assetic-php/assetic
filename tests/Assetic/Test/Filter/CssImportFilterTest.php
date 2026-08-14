@@ -3,7 +3,10 @@
 namespace Assetic\Test\Filter;
 
 use PHPUnit\Framework\TestCase;
+use Assetic\Asset\AssetCache;
 use Assetic\Asset\FileAsset;
+use Assetic\Cache\ArrayCache;
+use Assetic\Contracts\Filter\HashableInterface;
 use Assetic\Filter\CssImportFilter;
 use Assetic\Filter\CssRewriteFilter;
 
@@ -83,6 +86,89 @@ CSS;
         $this->assertStringContainsString('body { color: red; }', $asset->getContent());
         $this->assertNotEmpty($seen);
         $this->assertStringContainsString('import.css', implode('|', $seen));
+    }
+
+    public function testIsHashableSoTheAssetCacheNeverSerializesIt()
+    {
+        $filter = new CssImportFilter();
+        $filter->setImportValidator(function ($path) {
+            return true;
+        });
+
+        $this->assertInstanceOf(HashableInterface::class, $filter);
+        $this->assertNotEmpty($filter->hash());
+    }
+
+    public function testAssetCacheDumpsAnAssetFilteredWithAnImportValidator()
+    {
+        $filter = new CssImportFilter();
+        $filter->setImportValidator(function ($path) {
+            return true;
+        });
+
+        $asset = new FileAsset(__DIR__ . '/fixtures/cssimport/main.css', [$filter], __DIR__ . '/fixtures/cssimport', 'main.css');
+        $cached = new AssetCache($asset, new ArrayCache());
+
+        // The cache key is built from the asset's filters, serializing any that are
+        // not hashable. Serializing a closure throws, so a filter holding an import
+        // validator has to hash itself or this dump fails outright.
+        $this->assertStringContainsString('body { color: red; }', $cached->dump());
+    }
+
+    public function testHashIsStableBetweenEquivalentInstances()
+    {
+        $bare = new CssImportFilter();
+
+        $validated = new CssImportFilter();
+        $validated->setImportValidator(function ($path) {
+            return true;
+        });
+
+        // A stable hash is what keeps the asset cache usable across requests.
+        $this->assertSame($bare->hash(), (new CssImportFilter())->hash());
+        $this->assertSame($validated->hash(), $validated->hash());
+        $this->assertNotSame($bare->hash(), $validated->hash());
+    }
+
+    public function testHashDistinguishesValidatorsByBoundConfiguration()
+    {
+        $allowsA = new CssImportFilter();
+        $allowsA->setImportValidator($this->createRootValidator('/allowed/a'));
+
+        $allowsB = new CssImportFilter();
+        $allowsB->setImportValidator($this->createRootValidator('/allowed/b'));
+
+        // Validators declared in the same place but confining imports to different
+        // roots must not share a cache key, or one filter is served output the other
+        // produced under looser rules.
+        $this->assertNotSame($allowsA->hash(), $allowsB->hash());
+
+        // An equivalent configuration still hashes alike, so the cache stays warm.
+        $this->assertSame($allowsA->hash(), (new CssImportFilter())
+            ->setImportValidator($this->createRootValidator('/allowed/a'))
+            ->hash());
+    }
+
+    public function testHashDistinguishesValidatorsByDeclarationSite()
+    {
+        $permissive = new CssImportFilter();
+        $permissive->setImportValidator(function ($path) {
+            return true;
+        });
+
+        $restrictive = new CssImportFilter();
+        $restrictive->setImportValidator(function ($path) {
+            return false;
+        });
+
+        $this->assertNotSame($permissive->hash(), $restrictive->hash());
+    }
+
+    private function createRootValidator($root)
+    {
+        return function ($path) use ($root) {
+            return strpos($path, $root) === 0;
+        };
     }
 
     public function testNonCssImport()

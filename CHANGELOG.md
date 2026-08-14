@@ -1,5 +1,69 @@
 # Changelog
 
+## 3.2.2 (2026-08-14)
+
+### Bug fixes
+
+- `CssImportFilter` now implements `HashableInterface`, so it is hashed instead of serialized when `AssetCache` builds its cache key. Serializing the filter threw `Serialization of 'Closure' is not allowed` whenever an import validator had been set.
+  - The hash covers the inner import filter and the import validator, so filters confining imports to different paths no longer share a cache entry.
+  - Cache keys for assets filtered by `CssImportFilter` change with this release, so those assets are rebuilt once on upgrade.
+
+## 3.2.1 (2026-07-26)
+
+### New features
+
+- Added an optional import validator to `CssImportFilter`, letting consumers confine `@import` inlining to trusted paths, by @LukeTowers in https://github.com/assetic-php/assetic/pull/51
+
+## 3.2.0 (2026-06-20)
+
+### New features
+
+- Added support for Twig 3 alongside Twig 2 by @austinderrick in https://github.com/assetic-php/assetic/pull/49
+- Added support for the Tailwind CSS CLI v4 by @bennothommo in https://github.com/assetic-php/assetic/pull/50
+
+### Community updates
+
+- Added PHP 8.4 and 8.5 to the test matrix and updated the CI workflow to the Node 20 actions by @austinderrick in https://github.com/assetic-php/assetic/pull/48
+
+## 3.1.6 (2026-06-04)
+
+### Bug fixes
+
+- Resolved PHP 8.4 / 8.5 deprecation notices in `HttpAsset` and `BasePhpFormulaLoader` by @austinderrick in https://github.com/assetic-php/assetic/pull/47
+
+## 3.1.5 (2026-04-23)
+
+### New features
+
+- Added `AssetReference::getName()` and `AssetReference::getAsset()`, exposing the reference name and the asset it resolves to, by @dlundgren in https://github.com/assetic-php/assetic/pull/18
+
+## 3.1.4 (2026-04-22)
+
+### Bug fixes
+
+- `HttpAsset` now reads response headers via `http_get_last_response_headers()` instead of the `$http_response_header` local, which PHP 8.4 deprecates, by @matteotrubini in https://github.com/assetic-php/assetic/pull/46
+
+### Changes
+
+- Added audit configuration to `composer.json`
+- Fixed the test suite against current dependencies
+
+## 3.1.3 (2025-02-01)
+
+### Bug fixes
+
+- Resolved PHP 8.4 deprecation notices for implicitly nullable parameters throughout the codebase by @TomA-R in https://github.com/assetic-php/assetic/pull/45
+
+## 3.1.2 (2024-07-14)
+
+### New features
+
+- Added the Tailwind CSS Standalone CLI utility filter by @bennothommo in https://github.com/assetic-php/assetic/pull/42
+
+### Changes
+
+- Widened the `symfony/deprecation-contracts` constraint to `^2.2.0|^3.0` by @10n in https://github.com/assetic-php/assetic/pull/43
+
 ## 3.1.1 (2024-07-05)
 
 ### Changes

@@ -71,6 +71,54 @@ EOF;
         $this->assertStringContainsString('color: red', $asset->getContent(), 'Import paths are correctly used');
     }
 
+    public function testImportValidatorCanRejectImports()
+    {
+        $asset = new FileAsset(__DIR__ . '/fixtures/sass/main.scss');
+        $asset->load();
+
+        $filter = $this->getFilter();
+        $filter->setImportValidator(function ($path) {
+            return false;
+        });
+        $filter->filterLoad($asset);
+
+        // A rejected import is reported as unresolved, so scssphp emits the original
+        // statement verbatim instead of inlining the file.
+        $this->assertStringNotContainsString('color: blue', $asset->getContent());
+        $this->assertStringContainsString('@import "include"', $asset->getContent());
+        $this->assertStringContainsString('color: red', $asset->getContent());
+    }
+
+    public function testImportValidatorReceivesResolvedPathAndCanAllow()
+    {
+        $asset = new FileAsset(__DIR__ . '/fixtures/sass/main.scss');
+        $asset->load();
+
+        $seen = [];
+        $filter = $this->getFilter();
+        $filter->setImportValidator(function ($path) use (&$seen) {
+            $seen[] = $path;
+            return true;
+        });
+        $filter->filterLoad($asset);
+
+        // Allowed imports inline as normal, and the validator sees a resolved path.
+        $this->assertStringContainsString('color: blue', $asset->getContent());
+        $this->assertNotEmpty($seen);
+        $this->assertStringContainsString('_include.scss', implode('|', $seen));
+    }
+
+    public function testImportsAreUnaffectedWhenNoValidatorIsSet()
+    {
+        $asset = new FileAsset(__DIR__ . '/fixtures/sass/main.scss');
+        $asset->load();
+
+        $this->getFilter()->filterLoad($asset);
+
+        // Default behaviour is unchanged for callers that set no validator.
+        $this->assertStringContainsString('color: blue', $asset->getContent());
+    }
+
     public function testRegisterFunction()
     {
         $asset = new StringAsset('.foo{ color: bar(); }');

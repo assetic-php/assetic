@@ -5,6 +5,7 @@ namespace Assetic\Filter;
 use Assetic\Contracts\Asset\AssetInterface;
 use Assetic\Contracts\Filter\DependencyExtractorInterface;
 use Assetic\Factory\AssetFactory;
+use Assetic\Filter\Scssphp\ValidatingCompiler;
 use Assetic\Util\CssUtils;
 use ScssPhp\ScssPhp\Compiler;
 use ScssPhp\ScssPhp\OutputStyle;
@@ -26,6 +27,9 @@ class ScssphpFilter extends BaseFilter implements DependencyExtractorInterface
     private $formatter;
     private $outputStyle;
     private $variables = [];
+
+    /** @var callable|null */
+    private $importValidator;
 
     public function enableCompass($enable = true)
     {
@@ -106,6 +110,26 @@ class ScssphpFilter extends BaseFilter implements DependencyExtractorInterface
         $this->importPaths[] = $path;
     }
 
+    /**
+     * Set an optional validator that authorises each `@import` target before scssphp
+     * reads it. The validator receives the resolved filesystem path and must return
+     * true to allow the import or false to reject it, in which case the original
+     * `@import` statement is emitted verbatim instead of being inlined.
+     *
+     * This is an opt-in confinement hook for consumers that compile SCSS they do
+     * not control. Without it, `@import` targets resolve against the configured
+     * import paths and against the importing file's own directory, with `..`
+     * traversal allowed, so resolution is not bounded to any particular tree.
+     * Defaults to null (no restriction) so existing behaviour is unchanged for
+     * callers that do not set it.
+     */
+    public function setImportValidator(?callable $importValidator): self
+    {
+        $this->importValidator = $importValidator;
+
+        return $this;
+    }
+
     public function registerFunction($name, $callable, ?array $argumentDeclaration = null)
     {
         $this->customFunctions[$name] = [
@@ -116,7 +140,7 @@ class ScssphpFilter extends BaseFilter implements DependencyExtractorInterface
 
     public function filterLoad(AssetInterface $asset)
     {
-        $sc = new Compiler();
+        $sc = $this->createCompiler();
 
         if ($dir = $asset->getSourceDirectory()) {
             $sc->addImportPath($dir);
@@ -145,9 +169,21 @@ class ScssphpFilter extends BaseFilter implements DependencyExtractorInterface
         $asset->setContent($sc->compileString($asset->getContent())->getCss());
     }
 
+    /**
+     * Creates the scssphp compiler, honouring the import validator if one is set.
+     */
+    private function createCompiler(): Compiler
+    {
+        if (null === $this->importValidator) {
+            return new Compiler();
+        }
+
+        return new ValidatingCompiler($this->importValidator);
+    }
+
     public function getChildren(AssetFactory $factory, $content, $loadPath = null)
     {
-        $sc = new Compiler();
+        $sc = $this->createCompiler();
         if ($loadPath !== null) {
             $sc->addImportPath($loadPath);
         }

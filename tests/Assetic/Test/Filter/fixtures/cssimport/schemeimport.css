@@ -1,0 +1,4 @@
+/* schemeimport.css */
+@import url("file:///etc/hostname");
+@import url("//example.com/remote.css");
+body { color: blue; }

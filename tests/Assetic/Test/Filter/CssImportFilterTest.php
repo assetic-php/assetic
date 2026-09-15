@@ -88,6 +88,43 @@ CSS;
         $this->assertStringContainsString('import.css', implode('|', $seen));
     }
 
+    public function testImportValidatorAuthorisesSchemeBearingImports()
+    {
+        $asset = new FileAsset(__DIR__ . '/fixtures/cssimport/schemeimport.css', [], __DIR__ . '/fixtures/cssimport', 'schemeimport.css');
+        $asset->load();
+
+        $seen = [];
+        $filter = new CssImportFilter();
+        $filter->setImportValidator(function ($path) use (&$seen) {
+            $seen[] = $path;
+            return false;
+        });
+        $filter->filterLoad($asset);
+
+        // A target carrying a scheme resolves to the URL itself rather than a path
+        // under the source root, and is dispatched to the remote loader. The
+        // validator is consulted for it like any other import form.
+        $this->assertContains('file:///etc/hostname', $seen);
+        $this->assertContains('//example.com/remote.css', $seen);
+
+        // Rejected imports are left as raw @import statements and never loaded.
+        $this->assertStringContainsString('@import url("file:///etc/hostname");', $asset->getContent());
+        $this->assertStringContainsString('@import url("//example.com/remote.css");', $asset->getContent());
+        $this->assertStringContainsString('body { color: blue; }', $asset->getContent());
+    }
+
+    public function testImportsAreUnaffectedWhenNoValidatorIsSet()
+    {
+        $asset = new FileAsset(__DIR__ . '/fixtures/cssimport/main.css', [], __DIR__ . '/fixtures/cssimport', 'main.css');
+        $asset->load();
+
+        $filter = new CssImportFilter();
+        $filter->filterLoad($asset);
+
+        // Default behaviour is unchanged for callers that set no validator.
+        $this->assertStringContainsString('body { color: red; }', $asset->getContent());
+    }
+
     public function testIsHashableSoTheAssetCacheNeverSerializesIt()
     {
         $filter = new CssImportFilter();
